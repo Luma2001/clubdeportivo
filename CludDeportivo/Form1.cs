@@ -41,11 +41,12 @@ namespace CludDeportivo
                 {
                     MessageBox.Show($"Ingreso exitoso. Bienvenido, {textUser.Text}!");
                     Form sistema = new sistema();
-                    sistema.ShowDialog();
+                    sistema.Show(); 
+                    this.Hide();
                 }
                 else
                 {
-                    MessageBox.Show("El usuario existe pero está inactivo.");
+                    MessageBox.Show("El usuario existe, pero está inactivo.");
                 }
             }
             else

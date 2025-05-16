@@ -30,8 +30,8 @@ namespace CludDeportivo
         private void buttonSalir_Click(object sender, EventArgs e)
         {
             Form login = new FormLogin();
-            login.ShowDialog();
-            //login.Show();
+            login.Show();
+            this.Hide();
         }
     }
 }
