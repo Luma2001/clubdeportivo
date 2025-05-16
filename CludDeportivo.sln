@@ -5,8 +5,6 @@ VisualStudioVersion = 17.13.35931.197 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CludDeportivo", "CludDeportivo\CludDeportivo.csproj", "{6E62A8EE-43FC-4057-9602-9795629A57E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimerEjercicio", "..\PrimerEjercicio\PrimerEjercicio\PrimerEjercicio.csproj", "{AF74B8E3-589E-359C-5ABA-34F9DD32437E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{6E62A8EE-43FC-4057-9602-9795629A57E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E62A8EE-43FC-4057-9602-9795629A57E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E62A8EE-43FC-4057-9602-9795629A57E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF74B8E3-589E-359C-5ABA-34F9DD32437E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF74B8E3-589E-359C-5ABA-34F9DD32437E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF74B8E3-589E-359C-5ABA-34F9DD32437E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF74B8E3-589E-359C-5ABA-34F9DD32437E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

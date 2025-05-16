@@ -27,6 +27,7 @@ namespace CludDeportivo.Datos
 
                 //Definimos los parámetros que tiene el procedure
                 comando.Parameters.Add("usu", MySqlDbType.VarChar).Value = L_User;
+                comando.Parameters.Add("pass", MySqlDbType.VarChar).Value = P_User;
                 //Abrimos la conexión
                 MessageBox.Show("Estado de conexión antes de abrir: " + sqlCon.State);
                 sqlCon.Open();

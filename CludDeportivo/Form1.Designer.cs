@@ -81,7 +81,7 @@
             buttonLogin.Name = "buttonLogin";
             buttonLogin.Size = new Size(285, 56);
             buttonLogin.TabIndex = 5;
-            buttonLogin.Text = "INGRESAR";
+            buttonLogin.Text = "Iniciar Sesión";
             buttonLogin.UseVisualStyleBackColor = false;
             buttonLogin.Click += buttonLogin_Click;
             // 

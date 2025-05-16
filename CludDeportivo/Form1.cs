@@ -28,23 +28,32 @@ namespace CludDeportivo
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            DataTable tablaLogin = new DataTable(); //recibe los datos desde el formulario
-            Datos.Usuario dato = new Datos.Usuario(); //Variable que contiene todas las características de la clase
-            tablaLogin = dato.Log_Usu(textUser.Text, textPass.Text);
-            MessageBox.Show($"Usuario Activo: {tablaLogin.Rows.Count}");
+            Datos.Usuario dato = new Datos.Usuario();
+            DataTable tablaLogin = dato.Log_Usu(textUser.Text, textPass.Text);
 
-            if (tablaLogin.Rows.Count >=0)
+            // Verificamos si el usuario existe
+            if (tablaLogin.Rows.Count > 0)
             {
-                MessageBox.Show("Ingreso exitoso");
-                Form sistema = new sistema();
-                sistema.ShowDialog();
+                // Extraemos el valor de "activo" para comprobar si el usuario está habilitado
+                bool usuarioActivo = Convert.ToBoolean(tablaLogin.Rows[0]["activo"]);
+
+                if (usuarioActivo)
+                {
+                    MessageBox.Show($"Ingreso exitoso. Bienvenido, {textUser.Text}!");
+                    Form sistema = new sistema();
+                    sistema.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("El usuario existe pero está inactivo.");
+                }
             }
             else
             {
-                MessageBox.Show("Usuario y/o password incorrecto");
+                MessageBox.Show("Usuario y/o contraseña incorrectos.");
             }
-
         }
+
 
         private void textUser_TextChanged(object sender, EventArgs e)
         {
