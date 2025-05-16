@@ -39,19 +39,20 @@ namespace CludDeportivo
 
                 if (usuarioActivo)
                 {
-                    MessageBox.Show($"Ingreso exitoso. Bienvenido, {textUser.Text}!");
-                    Form sistema = new sistema();
+                    MessageBox.Show($"Ingreso exitoso. Bienvenido, {textUser.Text}!", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Form sistema = new sistema(textUser.Text);
+                   
                     sistema.Show(); 
                     this.Hide();
                 }
                 else
                 {
-                    MessageBox.Show("El usuario existe, pero está inactivo.");
+                    MessageBox.Show("El usuario existe, pero está inactivo.","Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Usuario y/o contraseña incorrectos.");
+                MessageBox.Show("Usuario y/o contraseña incorrectos.", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

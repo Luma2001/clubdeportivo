@@ -36,6 +36,7 @@
             buttonCobrar = new Button();
             buttonCarnet = new Button();
             buttonDeudor = new Button();
+            lblUsuario = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -122,11 +123,22 @@
             buttonDeudor.Text = "Lista Deudores";
             buttonDeudor.UseVisualStyleBackColor = false;
             // 
+            // lblUsuario
+            // 
+            lblUsuario.AutoSize = true;
+            lblUsuario.Location = new Point(35, 535);
+            lblUsuario.Name = "lblUsuario";
+            lblUsuario.Size = new Size(81, 25);
+            lblUsuario.TabIndex = 10;
+            lblUsuario.Text = "Usuario: ";
+            lblUsuario.Click += lblUsuario_Click;
+            // 
             // sistema
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(948, 570);
+            Controls.Add(lblUsuario);
             Controls.Add(buttonDeudor);
             Controls.Add(buttonCarnet);
             Controls.Add(buttonCobrar);
@@ -151,5 +163,6 @@
         private Button buttonCobrar;
         private Button buttonCarnet;
         private Button buttonDeudor;
+        private Label lblUsuario;
     }
 }

@@ -12,14 +12,22 @@ namespace CludDeportivo
 {
     public partial class sistema : Form
     {
-        public sistema()
+        private string? usuario;
+        public sistema(string usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
+
+
         }
+
+
+
+
 
         private void sistema_Load(object sender, EventArgs e)
         {
-
+            lblUsuario.Text = "USUARIO: " + usuario + " (administrador)";
         }
 
         private void labelTitle_Click(object sender, EventArgs e)
@@ -29,9 +37,16 @@ namespace CludDeportivo
 
         private void buttonSalir_Click(object sender, EventArgs e)
         {
-            Form login = new FormLogin();
-            login.Show();
-            this.Hide();
+            Application.Exit();
+
+            //Form login = new FormLogin();
+            //login.Show();
+            //this.Hide();
+        }
+
+        private void lblUsuario_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
