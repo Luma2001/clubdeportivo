@@ -15,7 +15,16 @@ insert into usuario(nombre,clave) values
 ("clubEmma","emaAdmin"),
 ("admin","123456");
 
-
+create table cliente(
+id int auto_increment,
+nombre varchar(20),
+apellido varchar(12),
+dni varchar(10),
+direccion varchar(20),
+socio boolean,
+actoFisico boolean,
+constraint primary key(id)
+);
 /*Creamos procedimiento para el login*/
 delimiter //
 create procedure login(in usu varchar(20), in pass varchar(12))
