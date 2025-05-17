@@ -26,3 +26,6 @@ App.config
 *.resharper
 _ReSharper.*/
 *.sln.docstates
+
+CludDeportivo/bin/
+CludDeportivo/obj/
