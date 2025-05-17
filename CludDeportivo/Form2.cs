@@ -48,5 +48,12 @@ namespace CludDeportivo
         {
 
         }
+
+        private void buttonRegistrar_Click(object sender, EventArgs e)
+        {
+            Form Registro = new Registro();
+            Registro.Show();
+            
+        }
     }
 }

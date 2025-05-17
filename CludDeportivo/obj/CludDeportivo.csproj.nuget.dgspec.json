@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\norbe\\source\\repos\\CludDeportivo\\CludDeportivo\\CludDeportivo.csproj": {}
+    "C:\\Users\\Lean\\Source\\Repos\\clubdeportivo\\CludDeportivo\\CludDeportivo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\norbe\\source\\repos\\CludDeportivo\\CludDeportivo\\CludDeportivo.csproj": {
+    "C:\\Users\\Lean\\Source\\Repos\\clubdeportivo\\CludDeportivo\\CludDeportivo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\norbe\\source\\repos\\CludDeportivo\\CludDeportivo\\CludDeportivo.csproj",
+        "projectUniqueName": "C:\\Users\\Lean\\Source\\Repos\\clubdeportivo\\CludDeportivo\\CludDeportivo.csproj",
         "projectName": "CludDeportivo",
-        "projectPath": "C:\\Users\\norbe\\source\\repos\\CludDeportivo\\CludDeportivo\\CludDeportivo.csproj",
-        "packagesPath": "C:\\Users\\norbe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\norbe\\source\\repos\\CludDeportivo\\CludDeportivo\\obj\\",
+        "projectPath": "C:\\Users\\Lean\\Source\\Repos\\clubdeportivo\\CludDeportivo\\CludDeportivo.csproj",
+        "packagesPath": "C:\\Users\\Lean\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lean\\Source\\Repos\\clubdeportivo\\CludDeportivo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\norbe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Lean\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -75,7 +75,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
