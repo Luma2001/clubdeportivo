@@ -33,19 +33,9 @@ namespace CludDeportivo
             lblUsuario.Text = "USUARIO: " + usuario + " (administrador)";
         }
 
-        private void labelTitle_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void lblUsuario_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonRegistrar_Click(object sender, EventArgs e)
