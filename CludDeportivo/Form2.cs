@@ -18,12 +18,15 @@ namespace CludDeportivo
             InitializeComponent();
             this.usuario = usuario;
 
-
+            // Suscribirse al evento FormClosed
+            this.FormClosed += sistema_FormClosed;
         }
 
-
-
-
+        // método necesario para finalizar el proceso al cerrar esta ventana
+        private void sistema_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
 
         private void sistema_Load(object sender, EventArgs e)
         {
@@ -38,10 +41,6 @@ namespace CludDeportivo
         private void buttonSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
-
-            //Form login = new FormLogin();
-            //login.Show();
-            //this.Hide();
         }
 
         private void lblUsuario_Click(object sender, EventArgs e)
@@ -52,7 +51,7 @@ namespace CludDeportivo
         private void buttonRegistrar_Click(object sender, EventArgs e)
         {
             Form Registro = new Registro();
-            Registro.Show();
+            Registro.ShowDialog();
             
         }
     }
