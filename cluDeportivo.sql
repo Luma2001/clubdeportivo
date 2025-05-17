@@ -15,16 +15,16 @@ insert into usuario(nombre,clave) values
 ("clubEmma","emaAdmin"),
 ("admin","123456");
 
-create table cliente(
-id int auto_increment,
+create table persona(
+id int,
 nombre varchar(20),
 apellido varchar(12),
 dni varchar(10),
 direccion varchar(20),
 socio boolean,
-actoFisico boolean,
-constraint primary key(id)
-);
+aptoFisico boolean,
+constraint primary key(id));
+
 /*Creamos procedimiento para el login*/
 delimiter //
 create procedure login(in usu varchar(20), in pass varchar(12))
@@ -36,7 +36,62 @@ call login("clubEmma", "emaAdmin")//
 call login("admin", "123456")//
 call login("dato1", "dato2")//
 
-/*Por ahora sólo tenemos un tipo de rol no es necesario
+
+DELIMITER //
+
+CREATE PROCEDURE NuevoRegistro (
+    IN nom VARCHAR(20),
+    IN ape VARCHAR(12),
+    IN doc VARCHAR(10),
+    IN Dire VARCHAR(20),
+    IN esSoc BOOLEAN,
+    IN apFis BOOLEAN,
+    OUT rta INT
+)
+BEGIN
+    DECLARE filas INT;
+    DECLARE existe INT;
+
+    -- Obtener el último número de cliente
+    SELECT IFNULL(MAX(id), 100) + 1 INTO filas FROM persona;
+
+    -- Verificar si el postulante está registrado
+    SELECT COUNT(*) INTO existe FROM persona WHERE dni = doc AND apellido = ape;
+
+    IF existe = 0 THEN 
+        -- Insertar nuevo registro con los nombres correctos de columnas
+        INSERT INTO persona (id, nombre, apellido, dni, direccion, socio, aptoFisico)
+        VALUES (filas, nom, ape, doc, Dire, esSoc, apFis);
+
+        SET rta = filas; -- Retorna el número de registro del nuevo cliente
+    ELSE 
+        SET rta = -1; -- Retorna este valor si el registro del cliente ya existe
+    END IF;
+END //
+
+DELIMITER ;
+
+
+
+/*Create procedure NuevoRegistro (in nom varchar (20), in ape varchar (12), in doc varchar (10), in Dire varchar (20), in esSoc boolean, in apFis boolean, out rta int)
+begin
+	declare filas int;
+    declare existe int;
+-- Obtener el último número de cliente
+select ifNULL (max (id), 100) + 1 into filas from persona; 
+-- Verificar si el postulante está registrado.
+Select count(*) into existe from persona where dni = doc and apellido = ape;
+if existe = 0 then 
+	insert into persona values (nombre, apellido, dni, socio, aptoFisico);
+    set rta = filas; -- Retorna el número de regitro del nuevo cliente.
+else 
+	set rta = -1; -- Retorna este valor si el registro del cliente ya existe.
+end if;
+end //
+
+
+
+Por ahora sólo tenemos un tipo de rol no es necesario
 create table roles(
 id int,
 rol varchar(30),

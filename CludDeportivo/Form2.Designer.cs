@@ -63,6 +63,7 @@
             buttonRegistrar.TabIndex = 1;
             buttonRegistrar.Text = "Registrar Persona";
             buttonRegistrar.UseVisualStyleBackColor = false;
+            buttonRegistrar.Click += buttonRegistrar_Click;
             // 
             // buttonSalir
             // 

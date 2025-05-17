@@ -35,3 +35,4 @@ C:\Users\norbe\source\repos\CludDeportivo\CludDeportivo\obj\Debug\net8.0-windows
 C:\Users\norbe\source\repos\CludDeportivo\CludDeportivo\obj\Debug\net8.0-windows\CludDeportivo.sistema.resources
 C:\Users\norbe\source\repos\CludDeportivo\CludDeportivo\obj\Debug\net8.0-windows\CludDepo.033CCC52.Up2Date
 C:\Users\norbe\source\repos\CludDeportivo\CludDeportivo\obj\Debug\net8.0-windows\CludDeportivo.sourcelink.json
+C:\Users\norbe\source\repos\CludDeportivo\CludDeportivo\obj\Debug\net8.0-windows\CludDeportivo.Registro.resources
