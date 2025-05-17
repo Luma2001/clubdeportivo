@@ -13,7 +13,7 @@ namespace CludDeportivo
     public partial class sistema : Form
     {
         private string? usuario;
-        public sistema(string usuario)
+        public sistema(string? usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
