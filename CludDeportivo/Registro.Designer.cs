@@ -75,7 +75,7 @@
             buttonRegistrar.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonRegistrar.ForeColor = Color.White;
             buttonRegistrar.Location = new Point(735, 484);
-            buttonRegistrar.Margin = new Padding(5, 5, 5, 5);
+            buttonRegistrar.Margin = new Padding(5);
             buttonRegistrar.Name = "buttonRegistrar";
             buttonRegistrar.Size = new Size(220, 58);
             buttonRegistrar.TabIndex = 21;
@@ -86,7 +86,7 @@
             // textBoxDireccion
             // 
             textBoxDireccion.Location = new Point(570, 335);
-            textBoxDireccion.Margin = new Padding(5, 5, 5, 5);
+            textBoxDireccion.Margin = new Padding(5);
             textBoxDireccion.Name = "textBoxDireccion";
             textBoxDireccion.Size = new Size(314, 31);
             textBoxDireccion.TabIndex = 20;
@@ -94,7 +94,7 @@
             // textBoxDni
             // 
             textBoxDni.Location = new Point(570, 201);
-            textBoxDni.Margin = new Padding(5, 5, 5, 5);
+            textBoxDni.Margin = new Padding(5);
             textBoxDni.Name = "textBoxDni";
             textBoxDni.Size = new Size(314, 31);
             textBoxDni.TabIndex = 19;
@@ -124,7 +124,7 @@
             // textBoxApellido
             // 
             textBoxApellido.Location = new Point(118, 335);
-            textBoxApellido.Margin = new Padding(5, 5, 5, 5);
+            textBoxApellido.Margin = new Padding(5);
             textBoxApellido.Name = "textBoxApellido";
             textBoxApellido.Size = new Size(314, 31);
             textBoxApellido.TabIndex = 16;
@@ -143,7 +143,7 @@
             // textBoxNombre
             // 
             textBoxNombre.Location = new Point(118, 201);
-            textBoxNombre.Margin = new Padding(5, 5, 5, 5);
+            textBoxNombre.Margin = new Padding(5);
             textBoxNombre.Name = "textBoxNombre";
             textBoxNombre.Size = new Size(314, 31);
             textBoxNombre.TabIndex = 14;
@@ -164,7 +164,7 @@
             checkBoxAptoFisico.AutoSize = true;
             checkBoxAptoFisico.Font = new Font("SimSun", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             checkBoxAptoFisico.Location = new Point(570, 429);
-            checkBoxAptoFisico.Margin = new Padding(5, 5, 5, 5);
+            checkBoxAptoFisico.Margin = new Padding(5);
             checkBoxAptoFisico.Name = "checkBoxAptoFisico";
             checkBoxAptoFisico.Size = new Size(168, 25);
             checkBoxAptoFisico.TabIndex = 3;
@@ -176,7 +176,7 @@
             checkBoxSocio.AutoSize = true;
             checkBoxSocio.Font = new Font("SimSun-ExtB", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             checkBoxSocio.Location = new Point(118, 429);
-            checkBoxSocio.Margin = new Padding(5, 5, 5, 5);
+            checkBoxSocio.Margin = new Padding(5);
             checkBoxSocio.Name = "checkBoxSocio";
             checkBoxSocio.Size = new Size(96, 25);
             checkBoxSocio.TabIndex = 2;
@@ -189,7 +189,7 @@
             buttonVolver.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonVolver.ForeColor = Color.Black;
             buttonVolver.Location = new Point(139, 632);
-            buttonVolver.Margin = new Padding(5, 5, 5, 5);
+            buttonVolver.Margin = new Padding(5);
             buttonVolver.Name = "buttonVolver";
             buttonVolver.Size = new Size(288, 72);
             buttonVolver.TabIndex = 24;
@@ -209,7 +209,7 @@
             buttonVolver2.TabIndex = 25;
             buttonVolver2.Text = "VOLVER";
             buttonVolver2.UseVisualStyleBackColor = false;
-            buttonVolver2.Click += button1_Click;
+            buttonVolver2.Click += buttonVolver2_Click;
             // 
             // Registro
             // 
@@ -231,7 +231,7 @@
             Controls.Add(checkBoxAptoFisico);
             Controls.Add(checkBoxSocio);
             Controls.Add(buttonVolver);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "Registro";
             Text = "Registro";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
