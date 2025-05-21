@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CludDeportivo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+248a6d1adce192fbf60157cb790bc2c6781009d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a67b59582ed29b6c1c89ba92fa5ae2a51af6600")]
 [assembly: System.Reflection.AssemblyProductAttribute("CludDeportivo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CludDeportivo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

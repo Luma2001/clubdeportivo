@@ -1,3 +1,4 @@
+
 ﻿using CludDeportivo.Entidades;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace CludDeportivo
         {
             InitializeComponent();
         }
+
 
         private void buttonRegistrar_Click(object sender, EventArgs e)
         {
@@ -58,7 +60,13 @@ namespace CludDeportivo
 
         }
 
+
         private void buttonVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
         }

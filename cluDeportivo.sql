@@ -23,8 +23,13 @@ dni varchar(10),
 direccion varchar(20),
 socio boolean,
 aptoFisico boolean,
+<<<<<<< HEAD
 constraint primary key(id));
 
+=======
+constraint primary key(id)
+);
+>>>>>>> f3fa9325b5bc84ec7e86691d84f1f00f81204b13
 /*Creamos procedimiento para el login*/
 delimiter //
 create procedure login(in usu varchar(20), in pass varchar(12))
@@ -36,6 +41,7 @@ call login("clubEmma", "emaAdmin")//
 call login("admin", "123456")//
 call login("dato1", "dato2")//
 
+<<<<<<< HEAD
 
 DELIMITER //
 
@@ -74,13 +80,21 @@ DELIMITER ;
 
 
 /*Create procedure NuevoRegistro (in nom varchar (20), in ape varchar (12), in doc varchar (10), in Dire varchar (20), in esSoc boolean, in apFis boolean, out rta int)
+=======
+/* Procedimiento nuevo registro */
+Create procedure NuevoRegistro (in nom varchar (20). in ape varchar (12), in doc varchar (10), in Dire varchar (20), in esSoc boolean, in apFis boolean, out rta int)
+>>>>>>> f3fa9325b5bc84ec7e86691d84f1f00f81204b13
 begin
 	declare filas int;
     declare existe int;
 -- Obtener el último número de cliente
 select ifNULL (max (id), 100) + 1 into filas from persona; 
 -- Verificar si el postulante está registrado.
+<<<<<<< HEAD
 Select count(*) into existe from persona where dni = doc and apellido = ape;
+=======
+Select count (*) into existe from persona where dni = doc and apellido = ape;
+>>>>>>> f3fa9325b5bc84ec7e86691d84f1f00f81204b13
 if existe = 0 then 
 	insert into persona values (nombre, apellido, dni, socio, aptoFisico);
     set rta = filas; -- Retorna el número de regitro del nuevo cliente.
@@ -90,8 +104,12 @@ end if;
 end //
 
 
+<<<<<<< HEAD
 
 Por ahora sólo tenemos un tipo de rol no es necesario
+=======
+/*Por ahora sólo tenemos un tipo de rol no es necesario
+>>>>>>> f3fa9325b5bc84ec7e86691d84f1f00f81204b13
 create table roles(
 id int,
 rol varchar(30),

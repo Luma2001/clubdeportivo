@@ -11,10 +11,12 @@ namespace CludDeportivo.Datos
 {
     internal class Persona
     {
+
         public string RegistrarPersona(E_Persona persona)
         {
             string mensaje;
             MySqlConnection sqlCon = new MySqlConnection();
+
 
             try
             {
@@ -49,3 +51,5 @@ namespace CludDeportivo.Datos
 
     }
 }
+
+

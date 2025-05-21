@@ -9,22 +9,6 @@ namespace CludDeportivo
             InitializeComponent();
         }
 
-        private void userLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormLogin_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void passLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -56,12 +40,6 @@ namespace CludDeportivo
             }
         }
 
-
-        private void textUser_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void textUser_Enter(object sender, EventArgs e)
         {
             //Este evento se ejecuta cuando llega el foco
@@ -78,11 +56,6 @@ namespace CludDeportivo
                 textPass.Text = "";
                 textPass.UseSystemPasswordChar = true;
             }
-
-        }
-
-        private void textPass_TextChanged(object sender, EventArgs e)
-        {
 
         }
 

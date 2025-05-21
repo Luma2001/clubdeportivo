@@ -1,1 +1,31 @@
+# Archivos de compilación
+bin/
+obj/
+
+# Archivos binarios generados
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+*.tmp
+
+# Archivos temporales
+*~
+*.bak
+*.swp
+
+# Configuración sensible
+App.config
+*.user
+*.suo
+
+# Visual Studio
 .vs/
+*.vsix
+*.resharper
+_ReSharper.*/
+*.sln.docstates
+
+CludDeportivo/bin/
+CludDeportivo/obj/
