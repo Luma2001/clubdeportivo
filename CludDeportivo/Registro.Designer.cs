@@ -320,6 +320,7 @@
             Controls.Add(buttonVolver);
             Margin = new Padding(4);
             Name = "Registro";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "REGISTRO";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

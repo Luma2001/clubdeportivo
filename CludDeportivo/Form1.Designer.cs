@@ -121,6 +121,7 @@
             Controls.Add(userLabel);
             Controls.Add(logo);
             Name = "FormLogin";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormLogin";
             Load += FormLogin_Load;
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();

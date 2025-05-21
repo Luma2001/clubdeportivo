@@ -44,10 +44,9 @@
             // 
             labelTitle.AutoSize = true;
             labelTitle.Font = new Font("Microsoft Sans Serif", 36F, FontStyle.Bold, GraphicsUnit.Point, 178);
-            labelTitle.Location = new Point(124, 5);
-            labelTitle.Margin = new Padding(2, 0, 2, 0);
+            labelTitle.Location = new Point(177, 8);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(356, 55);
+            labelTitle.Size = new Size(526, 82);
             labelTitle.TabIndex = 0;
             labelTitle.Text = "Club Deportivo";
             labelTitle.TextAlign = ContentAlignment.TopCenter;
@@ -57,10 +56,9 @@
             buttonRegistrar.BackColor = Color.DarkCyan;
             buttonRegistrar.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
             buttonRegistrar.ForeColor = SystemColors.Control;
-            buttonRegistrar.Location = new Point(192, 92);
-            buttonRegistrar.Margin = new Padding(2);
+            buttonRegistrar.Location = new Point(274, 153);
             buttonRegistrar.Name = "buttonRegistrar";
-            buttonRegistrar.Size = new Size(142, 89);
+            buttonRegistrar.Size = new Size(203, 148);
             buttonRegistrar.TabIndex = 1;
             buttonRegistrar.Text = "Registrar Persona";
             buttonRegistrar.UseVisualStyleBackColor = false;
@@ -71,10 +69,9 @@
             buttonSalir.BackColor = Color.Red;
             buttonSalir.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
             buttonSalir.ForeColor = Color.Snow;
-            buttonSalir.Location = new Point(565, 302);
-            buttonSalir.Margin = new Padding(2);
+            buttonSalir.Location = new Point(807, 503);
             buttonSalir.Name = "buttonSalir";
-            buttonSalir.Size = new Size(79, 23);
+            buttonSalir.Size = new Size(113, 38);
             buttonSalir.TabIndex = 5;
             buttonSalir.Text = "Salir";
             buttonSalir.UseVisualStyleBackColor = false;
@@ -83,10 +80,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(38, 8);
-            pictureBox1.Margin = new Padding(2);
+            pictureBox1.Location = new Point(54, 13);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(81, 62);
+            pictureBox1.Size = new Size(116, 103);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
@@ -96,10 +92,9 @@
             buttonCobrar.BackColor = Color.DarkCyan;
             buttonCobrar.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
             buttonCobrar.ForeColor = SystemColors.Control;
-            buttonCobrar.Location = new Point(373, 94);
-            buttonCobrar.Margin = new Padding(2);
+            buttonCobrar.Location = new Point(533, 157);
             buttonCobrar.Name = "buttonCobrar";
-            buttonCobrar.Size = new Size(142, 89);
+            buttonCobrar.Size = new Size(203, 148);
             buttonCobrar.TabIndex = 7;
             buttonCobrar.Text = "Cobrar";
             buttonCobrar.UseVisualStyleBackColor = false;
@@ -109,10 +104,9 @@
             buttonCarnet.BackColor = Color.DarkCyan;
             buttonCarnet.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
             buttonCarnet.ForeColor = SystemColors.Control;
-            buttonCarnet.Location = new Point(192, 214);
-            buttonCarnet.Margin = new Padding(2);
+            buttonCarnet.Location = new Point(274, 357);
             buttonCarnet.Name = "buttonCarnet";
-            buttonCarnet.Size = new Size(142, 89);
+            buttonCarnet.Size = new Size(203, 148);
             buttonCarnet.TabIndex = 8;
             buttonCarnet.Text = "Emitir Carnet";
             buttonCarnet.UseVisualStyleBackColor = false;
@@ -122,10 +116,9 @@
             buttonDeudor.BackColor = Color.DarkCyan;
             buttonDeudor.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
             buttonDeudor.ForeColor = SystemColors.Control;
-            buttonDeudor.Location = new Point(373, 214);
-            buttonDeudor.Margin = new Padding(2);
+            buttonDeudor.Location = new Point(533, 357);
             buttonDeudor.Name = "buttonDeudor";
-            buttonDeudor.Size = new Size(142, 89);
+            buttonDeudor.Size = new Size(203, 148);
             buttonDeudor.TabIndex = 9;
             buttonDeudor.Text = "Lista Deudores";
             buttonDeudor.UseVisualStyleBackColor = false;
@@ -133,18 +126,17 @@
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
-            lblUsuario.Location = new Point(24, 321);
-            lblUsuario.Margin = new Padding(2, 0, 2, 0);
+            lblUsuario.Location = new Point(34, 535);
             lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(53, 15);
+            lblUsuario.Size = new Size(81, 25);
             lblUsuario.TabIndex = 10;
             lblUsuario.Text = "Usuario: ";
             // 
             // sistema
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(663, 342);
+            ClientSize = new Size(947, 570);
             Controls.Add(lblUsuario);
             Controls.Add(buttonDeudor);
             Controls.Add(buttonCarnet);
@@ -153,8 +145,8 @@
             Controls.Add(buttonSalir);
             Controls.Add(buttonRegistrar);
             Controls.Add(labelTitle);
-            Margin = new Padding(2);
             Name = "sistema";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Sistema Club Deportivo";
             Load += sistema_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
