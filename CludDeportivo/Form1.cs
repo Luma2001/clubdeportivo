@@ -25,13 +25,13 @@ namespace CludDeportivo
                 {
                     MessageBox.Show($"Ingreso exitoso. Bienvenido, {textUser.Text}!", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Form sistema = new sistema(textUser.Text);
-                   
-                    sistema.Show(); 
+
+                    sistema.Show();
                     this.Hide();
                 }
                 else
                 {
-                    MessageBox.Show("El usuario existe, pero está inactivo.","Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("El usuario existe, pero está inactivo.", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -76,6 +76,11 @@ namespace CludDeportivo
                 textPass.Text = "Ingresar Contraseña...";
                 textPass.UseSystemPasswordChar = false;
             }
+        }
+
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

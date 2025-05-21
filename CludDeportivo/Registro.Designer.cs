@@ -44,6 +44,11 @@
             checkBoxSocio = new CheckBox();
             buttonVolver = new Button();
             buttonVolver2 = new Button();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -85,19 +90,27 @@
             // 
             // textBoxDireccion
             // 
+            textBoxDireccion.ForeColor = SystemColors.ControlText;
             textBoxDireccion.Location = new Point(570, 335);
             textBoxDireccion.Margin = new Padding(5);
             textBoxDireccion.Name = "textBoxDireccion";
             textBoxDireccion.Size = new Size(314, 31);
             textBoxDireccion.TabIndex = 20;
+            textBoxDireccion.Text = "Dirección requerido...";
+            textBoxDireccion.Enter += textBoxDireccion_Enter;
+            textBoxDireccion.Leave += textBoxDireccion_Leave;
             // 
             // textBoxDni
             // 
+            textBoxDni.ForeColor = SystemColors.ControlText;
             textBoxDni.Location = new Point(570, 201);
             textBoxDni.Margin = new Padding(5);
             textBoxDni.Name = "textBoxDni";
             textBoxDni.Size = new Size(314, 31);
             textBoxDni.TabIndex = 19;
+            textBoxDni.Text = "DNI requerido...";
+            textBoxDni.Enter += textBoxDni_Enter;
+            textBoxDni.Leave += textBoxDni_Leave;
             // 
             // labelDireccion
             // 
@@ -123,11 +136,15 @@
             // 
             // textBoxApellido
             // 
+            textBoxApellido.ForeColor = SystemColors.ControlText;
             textBoxApellido.Location = new Point(118, 335);
             textBoxApellido.Margin = new Padding(5);
             textBoxApellido.Name = "textBoxApellido";
             textBoxApellido.Size = new Size(314, 31);
             textBoxApellido.TabIndex = 16;
+            textBoxApellido.Text = "Apellido requerido...";
+            textBoxApellido.Enter += textBoxApellido_Enter;
+            textBoxApellido.Leave += textBoxApellido_Leave;
             // 
             // labelApellido
             // 
@@ -142,11 +159,15 @@
             // 
             // textBoxNombre
             // 
+            textBoxNombre.ForeColor = SystemColors.ControlText;
             textBoxNombre.Location = new Point(118, 201);
             textBoxNombre.Margin = new Padding(5);
             textBoxNombre.Name = "textBoxNombre";
             textBoxNombre.Size = new Size(314, 31);
             textBoxNombre.TabIndex = 14;
+            textBoxNombre.Text = "Nombre requerido...";
+            textBoxNombre.Enter += textBoxNombre_Enter;
+            textBoxNombre.Leave += textBoxNombre_Leave;
             // 
             // labelNombre
             // 
@@ -182,6 +203,7 @@
             checkBoxSocio.TabIndex = 2;
             checkBoxSocio.Text = "Socio";
             checkBoxSocio.UseVisualStyleBackColor = true;
+            checkBoxSocio.CheckedChanged += checkBoxSocio_CheckedChanged;
             // 
             // buttonVolver
             // 
@@ -211,11 +233,76 @@
             buttonVolver2.UseVisualStyleBackColor = false;
             buttonVolver2.Click += buttonVolver2_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Red;
+            label1.Location = new Point(431, 208);
+            label1.Margin = new Padding(5, 0, 5, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(23, 24);
+            label1.TabIndex = 26;
+            label1.Text = "*";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Red;
+            label2.Location = new Point(431, 342);
+            label2.Margin = new Padding(5, 0, 5, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(23, 24);
+            label2.TabIndex = 27;
+            label2.Text = "*";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(884, 208);
+            label3.Margin = new Padding(5, 0, 5, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(23, 24);
+            label3.TabIndex = 28;
+            label3.Text = "*";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.Red;
+            label4.Location = new Point(884, 342);
+            label4.Margin = new Padding(5, 0, 5, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(23, 24);
+            label4.TabIndex = 29;
+            label4.Text = "*";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.Red;
+            label5.Location = new Point(735, 430);
+            label5.Margin = new Padding(5, 0, 5, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(23, 24);
+            label5.TabIndex = 30;
+            label5.Text = "*";
+            // 
             // Registro
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1000, 562);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(buttonVolver2);
             Controls.Add(pictureBox1);
             Controls.Add(labelRegistroClientes);
@@ -233,7 +320,7 @@
             Controls.Add(buttonVolver);
             Margin = new Padding(4);
             Name = "Registro";
-            Text = "Registro";
+            Text = "REGISTRO";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -257,5 +344,10 @@
         private Label labelRegistroClientes;
         private PictureBox pictureBox1;
         private Button buttonVolver2;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
     }
 }

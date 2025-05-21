@@ -41,10 +41,9 @@
             // logo
             // 
             logo.Image = (Image)resources.GetObject("logo.Image");
-            logo.Location = new Point(45, 39);
-            logo.Margin = new Padding(2, 2, 2, 2);
+            logo.Location = new Point(64, 65);
             logo.Name = "logo";
-            logo.Size = new Size(225, 188);
+            logo.Size = new Size(321, 313);
             logo.SizeMode = PictureBoxSizeMode.StretchImage;
             logo.TabIndex = 0;
             logo.TabStop = false;
@@ -54,10 +53,9 @@
             userLabel.AutoSize = true;
             userLabel.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 178);
             userLabel.ForeColor = Color.DarkCyan;
-            userLabel.Location = new Point(294, 37);
-            userLabel.Margin = new Padding(2, 0, 2, 0);
+            userLabel.Location = new Point(420, 62);
             userLabel.Name = "userLabel";
-            userLabel.Size = new Size(76, 20);
+            userLabel.Size = new Size(110, 29);
             userLabel.TabIndex = 3;
             userLabel.Text = "Usuario:";
             // 
@@ -66,10 +64,9 @@
             passLabel.AutoSize = true;
             passLabel.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 178);
             passLabel.ForeColor = Color.DarkCyan;
-            passLabel.Location = new Point(294, 122);
-            passLabel.Margin = new Padding(2, 0, 2, 0);
+            passLabel.Location = new Point(420, 203);
             passLabel.Name = "passLabel";
-            passLabel.Size = new Size(107, 20);
+            passLabel.Size = new Size(153, 29);
             passLabel.TabIndex = 4;
             passLabel.Text = "Contraseña:";
             // 
@@ -78,10 +75,9 @@
             buttonLogin.BackColor = Color.DarkSlateGray;
             buttonLogin.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point, 178);
             buttonLogin.ForeColor = SystemColors.ButtonHighlight;
-            buttonLogin.Location = new Point(315, 193);
-            buttonLogin.Margin = new Padding(2, 2, 2, 2);
+            buttonLogin.Location = new Point(450, 322);
             buttonLogin.Name = "buttonLogin";
-            buttonLogin.Size = new Size(200, 34);
+            buttonLogin.Size = new Size(286, 57);
             buttonLogin.TabIndex = 5;
             buttonLogin.Text = "Iniciar Sesión";
             buttonLogin.UseVisualStyleBackColor = false;
@@ -90,10 +86,9 @@
             // textUser
             // 
             textUser.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
-            textUser.Location = new Point(315, 74);
-            textUser.Margin = new Padding(2, 2, 2, 2);
+            textUser.Location = new Point(450, 123);
             textUser.Name = "textUser";
-            textUser.Size = new Size(201, 21);
+            textUser.Size = new Size(285, 28);
             textUser.TabIndex = 8;
             textUser.Text = "Ingresar Usuario...";
             textUser.TextAlign = HorizontalAlignment.Center;
@@ -103,10 +98,9 @@
             // textPass
             // 
             textPass.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
-            textPass.Location = new Point(315, 155);
-            textPass.Margin = new Padding(2, 2, 2, 2);
+            textPass.Location = new Point(450, 258);
             textPass.Name = "textPass";
-            textPass.Size = new Size(201, 21);
+            textPass.Size = new Size(285, 28);
             textPass.TabIndex = 9;
             textPass.Tag = "";
             textPass.Text = "Ingresar Contraseña...";
@@ -116,19 +110,19 @@
             // 
             // FormLogin
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(560, 270);
+            ClientSize = new Size(800, 450);
             Controls.Add(textPass);
             Controls.Add(textUser);
             Controls.Add(buttonLogin);
             Controls.Add(passLabel);
             Controls.Add(userLabel);
             Controls.Add(logo);
-            Margin = new Padding(2, 2, 2, 2);
             Name = "FormLogin";
             Text = "FormLogin";
+            Load += FormLogin_Load;
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             ResumeLayout(false);
             PerformLayout();
