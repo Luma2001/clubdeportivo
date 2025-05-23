@@ -43,6 +43,8 @@ namespace CludDeportivo.Datos
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
+                MessageBox.Show("Error al conectar a la base de datos", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return new DataTable();
             }
             finally
