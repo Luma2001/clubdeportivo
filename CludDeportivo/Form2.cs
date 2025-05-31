@@ -42,9 +42,19 @@ namespace CludDeportivo
         {
             Form Registro = new Registro();
             Registro.ShowDialog();
-            
+
         }
 
+        private void buttonDeudor_Click(object sender, EventArgs e)
+        {
+            Form Listado = new ListaDeudores();
+            Listado.ShowDialog();
+        }
 
+        private void buttonCobrar_Click(object sender, EventArgs e)
+        {
+            Form Cobrar = new Cobrar();
+            Cobrar.ShowDialog();
+        }
     }
 }
