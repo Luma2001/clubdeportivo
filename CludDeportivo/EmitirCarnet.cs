@@ -5,6 +5,8 @@ namespace CludDeportivo
 {
     public partial class EmitirCarnet : Form
     {
+        private E_Persona persona = null;
+
         public EmitirCarnet()
         {
             InitializeComponent();
@@ -44,7 +46,7 @@ namespace CludDeportivo
 
             // Obtener datos y crear objeto persona
             Persona personaDAO = new Persona();
-            E_Persona persona = personaDAO.ObtenerPersonaPorDni(dni);
+            persona = personaDAO.ObtenerPersonaPorDni(dni);
 
             // Si no hay persona
             if (persona == null)
@@ -65,9 +67,9 @@ namespace CludDeportivo
             }
 
             // Cargar datos de socio encontrado
-            lblNombre.Text += $" {persona.Nombre}";
-            lblApellido.Text += $" {persona.Apellido}";
-            lblSocio.Text += $" {(persona.EsSocio ? "Si" : "No")}";
+            lblNombre.Text = $"Nombre: {persona.Nombre}";
+            lblApellido.Text = $"Apellido: {persona.Apellido}";
+            lblSocio.Text = $"Socio: {(persona.EsSocio ? "Si" : "No")}";
 
             // Habilitar botón para emitir carnet
             btnEmitir.Enabled = true;
@@ -82,6 +84,20 @@ namespace CludDeportivo
 
             txtDNI.Text = "";
             btnEmitir.Enabled = false;
+        }
+
+        // OnClick del boton EMITIR
+        private void btnEmitir_Click(object sender, EventArgs e)
+        {
+            // Validación de seguridad. Si no hay persona cancelar
+            if (persona == null)
+            {
+                return;
+            }
+
+            // Si hay persona abrir form de Carnet y pasar los datos
+            Carnet carnet = new Carnet(persona);
+            carnet.ShowDialog();
         }
     }
 }

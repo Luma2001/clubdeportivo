@@ -67,6 +67,7 @@ namespace CludDeportivo.Datos
                         Direccion = reader["direccion"].ToString(),
                         EsSocio = Convert.ToBoolean(reader["socio"]),
                         AptoFisico = Convert.ToBoolean(reader["aptoFisico"]),
+                        FechaRegistro = reader["fecha_registro"].ToString(),
                     };
                 }
             }

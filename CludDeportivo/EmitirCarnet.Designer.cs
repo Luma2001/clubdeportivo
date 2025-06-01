@@ -146,12 +146,13 @@
             // btnEmitir
             // 
             btnEmitir.Enabled = false;
-            btnEmitir.Location = new Point(401, 167);
+            btnEmitir.Location = new Point(409, 167);
             btnEmitir.Name = "btnEmitir";
-            btnEmitir.Size = new Size(83, 90);
+            btnEmitir.Size = new Size(75, 90);
             btnEmitir.TabIndex = 28;
             btnEmitir.Text = "Emitir";
             btnEmitir.UseVisualStyleBackColor = true;
+            btnEmitir.Click += btnEmitir_Click;
             // 
             // EmitirCarnet
             // 
