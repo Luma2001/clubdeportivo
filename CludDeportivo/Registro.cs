@@ -22,14 +22,12 @@ namespace CludDeportivo
         {
             if (string.IsNullOrWhiteSpace(textBoxNombre.Text) || string.IsNullOrWhiteSpace(textBoxApellido.Text) || string.IsNullOrWhiteSpace(textBoxDni.Text) || string.IsNullOrWhiteSpace(textBoxDireccion.Text) || !checkBoxAptoFisico.Checked)
 
-
             {
                 MessageBox.Show("Debe completar datos requeridos (*) ", "AVISO DEL SISTEMA", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             }
             else
             {
-
                 string respuesta;
                 E_Persona persona = new E_Persona();
                 persona.Nombre = textBoxNombre.Text;
@@ -39,33 +37,39 @@ namespace CludDeportivo
                 persona.EsSocio = checkBoxSocio.Checked;
                 persona.AptoFisico = checkBoxAptoFisico.Checked;
 
-
                 Datos.Persona nuevoCliente = new Datos.Persona();
-                respuesta = nuevoCliente.RegistrarPersona(persona);
 
-
+                try
+                {
+                    respuesta = nuevoCliente.RegistrarPersona(persona);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al registrar cliente: " + ex.Message, "AVISO DEL SISTEMA",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 if (int.TryParse(respuesta, out int codigo))
                 {
                     if (codigo == -1) // -1 me indica usuario existente
                     {
-                        MessageBox.Show("REGISTRO DE CLIENTE YA EXISTE", "AVISO DEL SISTEMA",
+                        MessageBox.Show("El cliente ya se encuentra registrado", "AVISO DEL SISTEMA",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
-                        MessageBox.Show($"Se almacenó con éxito con el Registro Nro {codigo}", "AVISO DEL SISTEMA",
+                        MessageBox.Show($"Cliente registrado exitosamente. Nro. de registro: {codigo}", "AVISO DEL SISTEMA",
                         MessageBoxButtons.OK, MessageBoxIcon.Question);
                         textBoxNombre.Text = "Nombre requerido...";
                         textBoxApellido.Text = "Apellido requerido...";
                         textBoxDni.Text = "DNI requerido...";
                         textBoxDireccion.Text = "Dirección requerido...";
-                        checkBoxSocio.Checked=false;
-                        checkBoxAptoFisico.Checked=false;
+                        checkBoxSocio.Checked = false;
+                        checkBoxAptoFisico.Checked = false;
                     }
                 }
             }
-
         }
 
         private void buttonVolver_Click(object sender, EventArgs e)
@@ -80,7 +84,6 @@ namespace CludDeportivo
 
         private void checkBoxSocio_CheckedChanged(object sender, EventArgs e)
         {
-
         }
 
         private void textBoxNombre_Enter(object sender, EventArgs e)
@@ -156,4 +159,3 @@ namespace CludDeportivo
         }
     }
 }
-

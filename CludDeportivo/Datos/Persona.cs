@@ -40,13 +40,15 @@ namespace CludDeportivo.Datos
                 comando.ExecuteNonQuery();
                 mensaje = Convert.ToString(ParCodigo.Value);
 
+                return mensaje;
             }
             catch (Exception ex)
             {
                 mensaje = "Error al registrar persona: " + ex.Message;
+                throw new Exception(mensaje);
             }
 
-            return mensaje;
+        
         }
 
     }
