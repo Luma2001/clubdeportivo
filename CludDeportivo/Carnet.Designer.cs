@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Carnet));
-            pnlTitulo = new Panel();
             lblTitulo = new Label();
             pnlCarnet = new Panel();
             lblDNIValue = new Label();
@@ -44,26 +43,16 @@
             lblCarnetSocio = new Label();
             btnVolver = new Button();
             btnImprimir = new Button();
-            pnlTitulo.SuspendLayout();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
             pnlCarnet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             SuspendLayout();
-            // 
-            // pnlTitulo
-            // 
-            pnlTitulo.BackColor = SystemColors.ActiveCaption;
-            pnlTitulo.BorderStyle = BorderStyle.FixedSingle;
-            pnlTitulo.Controls.Add(lblTitulo);
-            pnlTitulo.Location = new Point(34, 12);
-            pnlTitulo.Name = "pnlTitulo";
-            pnlTitulo.Size = new Size(455, 33);
-            pnlTitulo.TabIndex = 0;
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(126, 0);
+            lblTitulo.Location = new Point(122, 0);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(201, 32);
             lblTitulo.TabIndex = 1;
@@ -73,6 +62,7 @@
             // 
             pnlCarnet.BackColor = SystemColors.ActiveCaption;
             pnlCarnet.BorderStyle = BorderStyle.FixedSingle;
+            pnlCarnet.Controls.Add(lblTitulo);
             pnlCarnet.Controls.Add(lblDNIValue);
             pnlCarnet.Controls.Add(lblSocioDesdeValue);
             pnlCarnet.Controls.Add(lblNombreValue);
@@ -83,16 +73,16 @@
             pnlCarnet.Controls.Add(lblApellido);
             pnlCarnet.Controls.Add(logo);
             pnlCarnet.Controls.Add(lblCarnetSocio);
-            pnlCarnet.Location = new Point(34, 51);
+            pnlCarnet.Location = new Point(34, 12);
             pnlCarnet.Name = "pnlCarnet";
-            pnlCarnet.Size = new Size(455, 183);
+            pnlCarnet.Size = new Size(455, 222);
             pnlCarnet.TabIndex = 2;
             // 
             // lblDNIValue
             // 
             lblDNIValue.AutoSize = true;
             lblDNIValue.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDNIValue.Location = new Point(18, 137);
+            lblDNIValue.Location = new Point(21, 181);
             lblDNIValue.Name = "lblDNIValue";
             lblDNIValue.Size = new Size(35, 20);
             lblDNIValue.TabIndex = 11;
@@ -102,7 +92,7 @@
             // 
             lblSocioDesdeValue.AutoSize = true;
             lblSocioDesdeValue.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSocioDesdeValue.Location = new Point(171, 127);
+            lblSocioDesdeValue.Location = new Point(174, 171);
             lblSocioDesdeValue.Name = "lblSocioDesdeValue";
             lblSocioDesdeValue.Size = new Size(88, 20);
             lblSocioDesdeValue.TabIndex = 10;
@@ -112,7 +102,7 @@
             // 
             lblNombreValue.AutoSize = true;
             lblNombreValue.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblNombreValue.Location = new Point(169, 85);
+            lblNombreValue.Location = new Point(172, 129);
             lblNombreValue.Name = "lblNombreValue";
             lblNombreValue.Size = new Size(64, 20);
             lblNombreValue.TabIndex = 9;
@@ -122,7 +112,7 @@
             // 
             lblApellidoValue.AutoSize = true;
             lblApellidoValue.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblApellidoValue.Location = new Point(169, 39);
+            lblApellidoValue.Location = new Point(172, 83);
             lblApellidoValue.Name = "lblApellidoValue";
             lblApellidoValue.Size = new Size(66, 20);
             lblApellidoValue.TabIndex = 8;
@@ -131,7 +121,7 @@
             // lblSocioDesde
             // 
             lblSocioDesde.AutoSize = true;
-            lblSocioDesde.Location = new Point(169, 147);
+            lblSocioDesde.Location = new Point(172, 191);
             lblSocioDesde.Name = "lblSocioDesde";
             lblSocioDesde.Size = new Size(70, 15);
             lblSocioDesde.TabIndex = 7;
@@ -140,7 +130,7 @@
             // lblDNI
             // 
             lblDNI.AutoSize = true;
-            lblDNI.Location = new Point(18, 156);
+            lblDNI.Location = new Point(21, 200);
             lblDNI.Name = "lblDNI";
             lblDNI.Size = new Size(27, 15);
             lblDNI.TabIndex = 6;
@@ -149,7 +139,7 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(169, 105);
+            lblNombre.Location = new Point(172, 149);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(51, 15);
             lblNombre.TabIndex = 5;
@@ -158,7 +148,7 @@
             // lblApellido
             // 
             lblApellido.AutoSize = true;
-            lblApellido.Location = new Point(169, 59);
+            lblApellido.Location = new Point(172, 103);
             lblApellido.Name = "lblApellido";
             lblApellido.Size = new Size(51, 15);
             lblApellido.TabIndex = 4;
@@ -167,7 +157,7 @@
             // logo
             // 
             logo.Image = (Image)resources.GetObject("logo.Image");
-            logo.Location = new Point(18, 19);
+            logo.Location = new Point(21, 63);
             logo.Margin = new Padding(2);
             logo.Name = "logo";
             logo.Size = new Size(129, 116);
@@ -178,7 +168,7 @@
             // lblCarnetSocio
             // 
             lblCarnetSocio.AutoSize = true;
-            lblCarnetSocio.Location = new Point(169, 0);
+            lblCarnetSocio.Location = new Point(164, 32);
             lblCarnetSocio.Name = "lblCarnetSocio";
             lblCarnetSocio.Size = new Size(107, 15);
             lblCarnetSocio.TabIndex = 0;
@@ -206,6 +196,10 @@
             btnImprimir.UseVisualStyleBackColor = true;
             btnImprimir.Click += btnImprimir_Click;
             // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            // 
             // Carnet
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -214,12 +208,9 @@
             Controls.Add(btnImprimir);
             Controls.Add(btnVolver);
             Controls.Add(pnlCarnet);
-            Controls.Add(pnlTitulo);
             Name = "Carnet";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Carnet";
-            pnlTitulo.ResumeLayout(false);
-            pnlTitulo.PerformLayout();
             pnlCarnet.ResumeLayout(false);
             pnlCarnet.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)logo).EndInit();
@@ -227,8 +218,6 @@
         }
 
         #endregion
-
-        private Panel pnlTitulo;
         private Label lblTitulo;
         private Panel pnlCarnet;
         private Label lblCarnetSocio;
@@ -243,5 +232,6 @@
         private Label lblSocioDesdeValue;
         private Button btnVolver;
         private Button btnImprimir;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }
