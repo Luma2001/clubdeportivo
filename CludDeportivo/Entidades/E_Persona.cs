@@ -23,6 +23,5 @@ namespace CludDeportivo.Entidades
 
                    $"Socio: {(EsSocio ? "Sí" : "No")}";
         }
-
     }
 }

@@ -56,5 +56,11 @@ namespace CludDeportivo
             Form Cobrar = new Cobrar();
             Cobrar.ShowDialog();
         }
+
+        private void buttonCarnet_Click(object sender, EventArgs e)
+        {
+            Form emitirCarnet = new EmitirCarnet();
+            emitirCarnet.ShowDialog();
+        }
     }
 }

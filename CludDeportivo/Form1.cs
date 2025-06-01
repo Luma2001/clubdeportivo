@@ -9,7 +9,6 @@ namespace CludDeportivo
             InitializeComponent();
         }
 
-
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             Datos.Usuario dato = new Datos.Usuario();
@@ -56,7 +55,6 @@ namespace CludDeportivo
                 textPass.Text = "";
                 textPass.UseSystemPasswordChar = true;
             }
-
         }
 
         private void textUser_Leave(object sender, EventArgs e)
@@ -80,9 +78,6 @@ namespace CludDeportivo
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
-
-

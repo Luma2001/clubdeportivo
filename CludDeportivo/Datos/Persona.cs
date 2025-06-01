@@ -1,22 +1,15 @@
-﻿using MySql.Data.MySqlClient;
-using CludDeportivo.Entidades;
-using System;
+﻿using CludDeportivo.Entidades;
+using MySql.Data.MySqlClient;
 using System.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CludDeportivo.Datos
 {
     internal class Persona
     {
-
         public string RegistrarPersona(E_Persona persona)
         {
             string mensaje;
             MySqlConnection sqlCon = new MySqlConnection();
-
 
             try
             {
@@ -47,11 +40,49 @@ namespace CludDeportivo.Datos
                 mensaje = "Error al registrar persona: " + ex.Message;
                 throw new Exception(mensaje);
             }
-
-        
         }
 
+        // metodo para buscar una persona por su numero de dni
+        public E_Persona ObtenerPersonaPorDni(string dni)
+        {
+            E_Persona persona = null;
+            MySqlConnection sqlCon = new MySqlConnection();
+
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                MySqlCommand comando = new MySqlCommand("SELECT * FROM persona WHERE dni = @dni", sqlCon);
+                comando.Parameters.AddWithValue("@dni", dni);
+
+                sqlCon.Open();
+                MySqlDataReader reader = comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    persona = new E_Persona
+                    {
+                        Nombre = reader["nombre"].ToString(),
+                        Apellido = reader["apellido"].ToString(),
+                        DNI = reader["dni"].ToString(),
+                        Direccion = reader["direccion"].ToString(),
+                        EsSocio = Convert.ToBoolean(reader["socio"]),
+                        AptoFisico = Convert.ToBoolean(reader["aptoFisico"]),
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener persona: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+
+            return persona;
+        }
     }
 }
-
-
