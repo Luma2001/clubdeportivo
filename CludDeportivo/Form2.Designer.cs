@@ -98,6 +98,7 @@
             buttonCobrar.TabIndex = 7;
             buttonCobrar.Text = "Cobrar";
             buttonCobrar.UseVisualStyleBackColor = false;
+            buttonCobrar.Click += buttonCobrar_Click;
             // 
             // buttonCarnet
             // 
@@ -122,6 +123,7 @@
             buttonDeudor.TabIndex = 9;
             buttonDeudor.Text = "Lista Deudores";
             buttonDeudor.UseVisualStyleBackColor = false;
+            buttonDeudor.Click += buttonDeudor_Click;
             // 
             // lblUsuario
             // 
