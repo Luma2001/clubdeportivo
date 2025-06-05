@@ -11,6 +11,11 @@ namespace CludDeportivo
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+            LoginUser();
+        }
+
+        private void LoginUser()
+        {
             Datos.Usuario dato = new Datos.Usuario();
             DataTable tablaLogin = dato.Log_Usu(textUser.Text, textPass.Text);
 
@@ -39,45 +44,12 @@ namespace CludDeportivo
             }
         }
 
-        private void textUser_Enter(object sender, EventArgs e)
+        private void textPass_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //Este evento se ejecuta cuando llega el foco
-            if (textUser.Text == "Ingresar Usuario...")
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                textUser.Text = "";
+                LoginUser();
             }
-        }
-
-        private void textPass_Enter(object sender, EventArgs e)
-        {
-            if (textPass.Text == "Ingresar Contraseña...")
-            {
-                textPass.Text = "";
-                textPass.UseSystemPasswordChar = true;
-            }
-        }
-
-        private void textUser_Leave(object sender, EventArgs e)
-        {
-            //Este evento se ejecuta cuando se va el foco
-            if (textUser.Text == "")
-            {
-                textUser.Text = "Ingresar Usuario...";
-            }
-        }
-
-        private void textPass_Leave(object sender, EventArgs e)
-        {
-            //Este evento se ejecuta cuando se va el foco
-            if (textPass.Text == "")
-            {
-                textPass.Text = "Ingresar Contraseña...";
-                textPass.UseSystemPasswordChar = false;
-            }
-        }
-
-        private void FormLogin_Load(object sender, EventArgs e)
-        {
         }
     }
 }
