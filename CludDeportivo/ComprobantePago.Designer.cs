@@ -92,7 +92,6 @@
             labelMonto.Size = new Size(78, 25);
             labelMonto.TabIndex = 8;
             labelMonto.Text = "monto...";
-            labelMonto.Click += labelMonto_Click;
             // 
             // labelTipoPago
             // 
@@ -102,7 +101,6 @@
             labelTipoPago.Size = new Size(56, 25);
             labelTipoPago.TabIndex = 7;
             labelTipoPago.Text = "tipo...";
-            labelTipoPago.Click += labelTipoPago_Click;
             // 
             // labelInicio
             // 
@@ -112,7 +110,6 @@
             labelInicio.Size = new Size(65, 25);
             labelInicio.TabIndex = 6;
             labelInicio.Text = "inicio...";
-            labelInicio.Click += labelInicio_Click;
             // 
             // labelDireccion
             // 
@@ -122,7 +119,6 @@
             labelDireccion.Size = new Size(95, 25);
             labelDireccion.TabIndex = 5;
             labelDireccion.Text = "dirección...";
-            labelDireccion.Click += labelDireccion_Click;
             // 
             // label6
             // 
@@ -169,7 +165,6 @@
             labelNombre.Size = new Size(89, 22);
             labelNombre.TabIndex = 0;
             labelNombre.Text = "Jane Doe";
-            labelNombre.Click += labelNombre_Click;
             // 
             // panel4
             // 
@@ -190,7 +185,6 @@
             labelHoy.Size = new Size(66, 25);
             labelHoy.TabIndex = 9;
             labelHoy.Text = "fecha...";
-            labelHoy.Click += labelHoy_Click;
             // 
             // labelFecha
             // 
@@ -231,7 +225,6 @@
             logo.SizeMode = PictureBoxSizeMode.StretchImage;
             logo.TabIndex = 2;
             logo.TabStop = false;
-            logo.Click += logo_Click;
             // 
             // labelInstituro
             // 
@@ -262,7 +255,6 @@
             labelTitulo.Size = new Size(456, 48);
             labelTitulo.TabIndex = 3;
             labelTitulo.Text = "COMPROBANTE DE PAGO";
-            labelTitulo.Click += labelTitulo_Click;
             // 
             // panel3
             // 

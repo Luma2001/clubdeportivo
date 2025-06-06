@@ -62,10 +62,21 @@ namespace CludDeportivo
 
                     if (filasAfectadas > 0)
                     {
-                        MessageBox.Show("Pago registrado correcamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Asignar datos al comprobante
+                        comprobante.cliente_f = lblCliente.Text.Replace("Cliente: ", "");
+                        comprobante.direccion_f = ""; // Obtener dirección desde BD
+                        comprobante.fecha_f = DateTime.Now; // Puedes usar fecha_vencimiento si lo tienes
+                        comprobante.monto_f = monto;
+                        comprobante.forma_f = optEfvo.Checked ? "Efectivo" : "Tarjeta";
+                        comprobante.tipo_pago_f = "Cuota";
+
+                        // Limpiar formulario
                         txtDNI.Text = "";
                         lblCliente.Text = "Cliente: -";
                         lblMontoAPagarValue.Text = "0,00";
+
+                        // Mensaje de confirmación
+                        MessageBox.Show("Pago registrado correcamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -76,6 +87,7 @@ namespace CludDeportivo
                 {
                     // Registro de pago de actividad para no socios
                     int idActividadSeleccionada = ((dynamic)cboActividades.SelectedItem).ID;
+                    string nombreActividad = ((dynamic)cboActividades.SelectedItem).Nombre;
 
                     string insertQuery = "INSERT INTO pago (idPersona, monto, fecha) VALUES ((SELECT id FROM persona WHERE dni = @dni), @monto, @fecha)";
                     MySqlCommand insertCommand = new MySqlCommand(insertQuery, sqlCon);
@@ -83,10 +95,18 @@ namespace CludDeportivo
                     insertCommand.Parameters.AddWithValue("@dni", txtDNI.Text);
                     insertCommand.Parameters.AddWithValue("@monto", monto);
                     insertCommand.Parameters.AddWithValue("@fecha", DateTime.Now.ToString("yyyy-MM-dd"));
-                    /* insertCommand.Parameters.AddWithValue("@idActividad", idActividadSeleccionada); */
 
                     insertCommand.ExecuteNonQuery();
 
+                    // Asignar datos al comprobante
+                    comprobante.cliente_f = lblCliente.Text.Replace("Cliente: ", "");
+                    comprobante.direccion_f = ""; // Obtener desde BD si es posible
+                    comprobante.fecha_f = DateTime.Now;
+                    comprobante.monto_f = monto;
+                    comprobante.forma_f = optEfvo.Checked ? "Efectivo" : "Tarjeta";
+                    comprobante.tipo_pago_f = $"Actividad: {nombreActividad}";
+
+                    // Mensaje de éxito
                     MessageBox.Show("Pago registrado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -172,6 +192,7 @@ namespace CludDeportivo
 
             bool isSocio = opSocio.Checked;
             string nombreCliente = "";
+            string direccionCliente = "";
 
             try
             {
@@ -179,7 +200,7 @@ namespace CludDeportivo
                 if (isSocio)
                 {
                     // Consulta para socios: traer monto de cuota pendiente
-                    query = "SELECT c.monto, CONCAT(p.nombre, ' ', p.apellido) AS Nombre FROM persona p INNER JOIN cuota c ON p.id = c.id_socio WHERE p.dni = @dni AND c.pagado = 0";
+                    query = "SELECT c.monto, CONCAT(p.nombre, ' ', p.apellido) AS Nombre, p.direccion FROM persona p INNER JOIN cuota c ON p.id = c.id_socio WHERE p.dni = @dni AND c.pagado = 0";
                 }
                 else
                 {
@@ -194,7 +215,7 @@ namespace CludDeportivo
                     int idActividadSeleccionada = ((dynamic)cboActividades.SelectedItem).ID;
 
                     // Consulta para traer costo de actividad
-                    query = "SELECT a.costo, CONCAT(p.nombre, ' ', p.apellido) AS Nombre FROM persona p INNER JOIN actividad a WHERE p.dni = @dni AND p.socio = 0 AND a.id = @idActividad";
+                    query = "SELECT a.costo, CONCAT(p.nombre, ' ', p.apellido) AS Nombre, p.direccion FROM persona p INNER JOIN actividad a WHERE p.dni = @dni AND p.socio = 0 AND a.id = @idActividad";
                 }
 
                 MySqlCommand command = new MySqlCommand(query, sqlCon);
@@ -214,12 +235,14 @@ namespace CludDeportivo
                 {
                     float monto = Convert.ToSingle(reader.GetValue(isSocio ? "monto" : "costo"));
                     nombreCliente = reader["Nombre"].ToString();
+                    direccionCliente = reader["direccion"]?.ToString() ?? "-";
                     lblMontoAPagarValue.Text = monto.ToString("F2");
                 }
                 else
                 {
                     lblMontoAPagarValue.Text = "0,00";
                     nombreCliente = "-";
+                    direccionCliente = "-";
                 }
 
                 reader.Close();

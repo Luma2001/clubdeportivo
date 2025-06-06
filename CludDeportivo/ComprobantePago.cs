@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Drawing.Printing;
 
 namespace CludDeportivo
 {
     public partial class Comprobante : Form
     {
-
         public Comprobante()
         {
             InitializeComponent();
@@ -26,6 +16,7 @@ namespace CludDeportivo
         public DateTime fecha_f;
         public float monto_f;
         public string? forma_f;
+        public string? tipo_pago_f;
         //public string? pago_f;
 
         private void Comprobante_Load(object sender, EventArgs e)
@@ -36,99 +27,65 @@ namespace CludDeportivo
             labelMonto.Text = monto_f.ToString("N2");
             labelTipoPago.Text = forma_f;
             labelHoy.Text = DateTime.UtcNow.ToShortDateString();
-
+            labelDatos.Text = tipo_pago_f;
         }
-
-
 
         //Impresión del comprobante de pago
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            btnImprimir.Visible = false;//elemento que no se va a imprimir entonces lo oculta
+            // Ocultar el botón "IMPRIMIR"
+            btnImprimir.Visible = false;
 
-            PrintDocument pd = new PrintDocument();
-            pd.PrintPage += new PrintPageEventHandler(FacturaPago);
-            pd.Print();
+            // Ocultar otros elementos irrelevantes
+            this.BackColor = Color.White;
+            this.FormBorderStyle = FormBorderStyle.None; // Oculta el marco de la ventana
 
-            btnImprimir.Visible = true;
+            try
+            {
+                // Capturar toda la vista del formulario como una imagen
+                Bitmap formImage = CaptureFormAsImage(this);
 
-            MessageBox.Show("Impresión exitosa", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+                // Abrir el cuadro de diálogo de impresión
+                PrintDocument printDocument = new PrintDocument();
+                printDocument.PrintPage += FacturaPago;
+                PrintDialog printDialog = new PrintDialog();
+                printDialog.Document = printDocument;
 
+                if (printDialog.ShowDialog() == DialogResult.OK)
+                {
+                    printDocument.Print();
+                }
+            }
+            finally
+            {
+                // Mostrar nuevamente el botón "IMPRIMIR" y el marco de la ventana
+                btnImprimir.Visible = true;
+                this.BackColor = SystemColors.Control;
+                this.FormBorderStyle = FormBorderStyle.Sizable; // Restaurar el marco de la ventana
+            }
         }
+
         private void FacturaPago(object sender, PrintPageEventArgs e)
         {
-            //Opción Uno (para imprimir un comprobante de pago específico)
-            Font font = new Font("Arial", 12);
-            e.Graphics.DrawString("COMPROBANTE DE PAGO", font, Brushes.Black, 100, 50);
-            e.Graphics.DrawString($"{cliente_f}", font, Brushes.Black, 100, 100);
-            e.Graphics.DrawString($"Dirección: {direccion_f}", font, Brushes.Black, 100, 130);
-            e.Graphics.DrawString($"Fecha de Inscripción: {fecha_f.ToShortDateString()}", font, Brushes.Black, 100, 160);
-            e.Graphics.DrawString($"Forma de Pago: {forma_f}", font, Brushes.Black, 100, 190);
-            e.Graphics.DrawString($"Monto: ${monto_f:C}", font, Brushes.Black, 100, 220);
+            // Capturar toda la vista del formulario como una imagen
+            Bitmap formImage = CaptureFormAsImage(this);
 
-
-
-            //Opción Dos (para imprimir el formulario completo)
-            /*
-            int x = SystemInformation.WorkingArea.X;
-            int y = SystemInformation.WorkingArea.Y;
-            int ancho = this.Width;
-            int alto = this.Height;
-            Rectangle bounds = new Rectangle(x, y, ancho, alto);
-            Bitmap img = new Bitmap(ancho, alto);
-            this.DrawToBitmap(img, bounds);
-            Point p = new Point(100, 100);
-            e.Graphics.DrawImage(img, p);*/
-
+            // Dibujar la imagen en la página de impresión
+            e.Graphics.DrawImage(formImage, 0, 0);
         }
 
-
-
-
-
-
-        //VARIABLES
-
-        private void logo_Click(object sender, EventArgs e)
+        private Bitmap CaptureFormAsImage(Control control)
         {
+            // Asegurarse de que el control esté visible antes de capturar
+            control.Visible = true;
 
+            // Crear un bitmap del mismo tamaño que el control
+            Bitmap bitmap = new Bitmap(control.Width, control.Height);
+
+            // Dibujar el control en el bitmap
+            control.DrawToBitmap(bitmap, new System.Drawing.Rectangle(0, 0, control.Width, control.Height));
+
+            return bitmap;
         }
-
-        private void labelHoy_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelNombre_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelDireccion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelInicio_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelTipoPago_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelMonto_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelTitulo_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
