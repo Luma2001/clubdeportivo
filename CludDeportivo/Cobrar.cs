@@ -31,124 +31,70 @@ namespace CludDeportivo
 
         private void btnPagar_Click(object sender, EventArgs e)
         {
-            MySqlConnection sqlCon = new MySqlConnection();
+            if (!float.TryParse(lblMontoAPagarValue.Text, out float monto) || monto <= 0)
+            {
+                MessageBox.Show("No hay un monto válido para pagar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!EsPagoValido(out string mensajeError))
+            {
+                MessageBox.Show(mensajeError, "Acción no permitida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
+
             try
             {
-                string query;
-                if (opSocio.Checked == true)
-                {
-                    query = "SELECT p.id, CONCAT(p.nombre, ' ', p.apellido) AS CLIENTE, p.direccion, c.fecha_vencimiento, c.monto " +
-                       "FROM persona p " +
-                       "INNER JOIN cuota c ON p.id = c.id_socio " +
-                       "WHERE p.apellido = @apellido AND p.dni = @dni AND c.pagado=0";
-                }
-                else
-                {
-                    query = "SELECT p.id, CONCAT(p.nombre, ' ', p.apellido) AS CLIENTE, p.direccion, p.fecha_registro, a.costo " +
-                        "FROM persona p INNER JOIN actividad a " +
-                        "WHERE p.apellido = @apellido AND p.dni = @dni AND p.socio = 0 AND a.id = 1;";
-                }
-
-                sqlCon = Conexion.getInstancia().CrearConexion();
-                MySqlCommand comando = new MySqlCommand(query, sqlCon);
-
-                // Se agregan los parámetros para evitar errores y mejorar seguridad
-                comando.Parameters.AddWithValue("@apellido", textApellido.Text);
-                comando.Parameters.AddWithValue("@dni", txtDNI.Text);
-
-                comando.CommandType = CommandType.Text;
                 sqlCon.Open();
 
-                MySqlDataReader reader;
-                reader = comando.ExecuteReader();
-
-                if (reader.HasRows)
+                if (opSocio.Checked)
                 {
-                    reader.Read();
+                    // Registrar pago de cuota para socios
+                    string updateQuery = "UPDATE cuota SET pagado = true WHERE id_socio = (SELECT id FROM persona WHERE dni = @dni)";
 
-                    comprobante.numero_f = reader.GetInt32(0);
-                    comprobante.cliente_f = reader.GetString(1);
-                    comprobante.direccion_f = reader.GetString(2);
-                    comprobante.fecha_f = reader.GetDateTime(3);
-                    comprobante.monto_f = reader.GetFloat(4);
+                    MySqlCommand updateCommand = new MySqlCommand(updateQuery, sqlCon);
 
-                    if (optEfvo.Checked == true)
+                    updateCommand.Parameters.AddWithValue("@dni", txtDNI.Text);
+
+                    int filasAfectadas = updateCommand.ExecuteNonQuery();
+
+                    if (filasAfectadas > 0)
                     {
-                        comprobante.forma_f = "Efectivo";
-                        comprobante.monto_f = (float)(comprobante.monto_f * 0.90);
+                        MessageBox.Show("Pago registrado correcamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtDNI.Text = "";
+                        lblCliente.Text = "Cliente: -";
+                        lblMontoAPagarValue.Text = "0,00";
                     }
                     else
                     {
-                        comprobante.forma_f = "Tarjeta";
+                        MessageBox.Show("No se encontró cuota pendiente para este socio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-
-                    //_________________________________________________________________________________________
-
-                    // Cerramos el lector antes de hacer otro comando
-                    reader.Close();
-
-                    string updateQuery;
-
-                    // Consulta para actualizar la cuota
-                    if (opSocio.Checked == true)
-                    {
-                        updateQuery = "UPDATE cuota SET pagado = true WHERE id_socio = (SELECT id FROM persona WHERE apellido = @apellido AND dni = @dni)";
-
-                        // Crear el comando con la nueva consulta
-                        MySqlCommand updateComando = new MySqlCommand(updateQuery, sqlCon);
-
-                        // Agregar parámetros para evitar errores y ataques SQL
-                        updateComando.Parameters.AddWithValue("@apellido", textApellido.Text);
-                        updateComando.Parameters.AddWithValue("@dni", txtDNI.Text);
-
-                        // Ejecutar la consulta
-                        int filasAfectadas = updateComando.ExecuteNonQuery();
-
-                        if (filasAfectadas > 0)
-                        {
-                            MessageBox.Show("Pago registrado correctamente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error al registrar el pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else { MessageBox.Show("Pago registrado correctamente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-
-                    //__________________________________________________________________________________________
-
-                    btnComprobante.Enabled = true;
                 }
                 else
                 {
-                    // Consulta para insertar el pago
-                    string insertQuery = "INSERT INTO pago (idPersona, monto, fecha) VALUES ((SELECT id FROM persona WHERE apellido = @apellido AND dni = @dni), @monto, @fecha)";
+                    // Registro de pago de actividad para no socios
+                    int idActividadSeleccionada = ((dynamic)cboActividades.SelectedItem).ID;
 
-                    // Crear el comando
-                    MySqlCommand insertComando = new MySqlCommand(insertQuery, sqlCon);
+                    string insertQuery = "INSERT INTO pago (idPersona, monto, fecha) VALUES ((SELECT id FROM persona WHERE dni = @dni), @monto, @fecha)";
+                    MySqlCommand insertCommand = new MySqlCommand(insertQuery, sqlCon);
 
-                    // Agregar parámetros
-                    insertComando.Parameters.AddWithValue("@apellido", textApellido.Text);
-                    insertComando.Parameters.AddWithValue("@dni", txtDNI.Text);
-                    insertComando.Parameters.AddWithValue("@monto", comprobante.monto_f); // Usa el monto calculado
-                    insertComando.Parameters.AddWithValue("@fecha", DateTime.Now.ToString("yyyy-MM-dd")); // Fecha actual en formato correcto
+                    insertCommand.Parameters.AddWithValue("@dni", txtDNI.Text);
+                    insertCommand.Parameters.AddWithValue("@monto", monto);
+                    insertCommand.Parameters.AddWithValue("@fecha", DateTime.Now.ToString("yyyy-MM-dd"));
+                    /* insertCommand.Parameters.AddWithValue("@idActividad", idActividadSeleccionada); */
 
-                    // Ejecutar la consulta
-                    int filasInsertadas = insertComando.ExecuteNonQuery();
+                    insertCommand.ExecuteNonQuery();
 
-                    if (filasInsertadas > 0)
-                    {
-                        MessageBox.Show("Pago registrado correctamente en la tabla pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error al registrar el pago en la tabla pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    MessageBox.Show("Pago registrado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
+                btnComprobante.Enabled = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "MENSAJE DEL CATCH", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al registrar el pago: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -206,9 +152,11 @@ namespace CludDeportivo
 
         private void CambiarEstadoActividades(object sender, EventArgs e)
         {
+            ActualizarMontoAPagar();
             if (opSocio.Checked)
             {
                 cboActividades.Enabled = false;
+                cboActividades.SelectedIndex = -1;
                 lblActividad.ForeColor = SystemColors.ActiveCaption;
             }
             else if (opNoSocio.Checked)
@@ -216,6 +164,122 @@ namespace CludDeportivo
                 cboActividades.Enabled = true;
                 lblActividad.ForeColor = SystemColors.ControlText;
             }
+        }
+
+        private void ActualizarMontoAPagar()
+        {
+            MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
+
+            bool isSocio = opSocio.Checked;
+            string nombreCliente = "";
+
+            try
+            {
+                string query;
+                if (isSocio)
+                {
+                    // Consulta para socios: traer monto de cuota pendiente
+                    query = "SELECT c.monto, CONCAT(p.nombre, ' ', p.apellido) AS Nombre FROM persona p INNER JOIN cuota c ON p.id = c.id_socio WHERE p.dni = @dni AND c.pagado = 0";
+                }
+                else
+                {
+                    // Para no socios: validar que haya actividad seleccionada
+                    if (cboActividades.SelectedItem == null)
+                    {
+                        lblMontoAPagarValue.Text = "0,00";
+                        lblCliente.Text = "Cliente: -";
+                        return;
+                    }
+
+                    int idActividadSeleccionada = ((dynamic)cboActividades.SelectedItem).ID;
+
+                    // Consulta para traer costo de actividad
+                    query = "SELECT a.costo, CONCAT(p.nombre, ' ', p.apellido) AS Nombre FROM persona p INNER JOIN actividad a WHERE p.dni = @dni AND p.socio = 0 AND a.id = @idActividad";
+                }
+
+                MySqlCommand command = new MySqlCommand(query, sqlCon);
+                command.Parameters.AddWithValue("@dni", txtDNI.Text);
+
+                if (!isSocio)
+                {
+                    int idActividadSeleccionada = ((dynamic)cboActividades.SelectedItem).ID;
+                    command.Parameters.AddWithValue("@idActividad", idActividadSeleccionada);
+                }
+
+                sqlCon.Open();
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    float monto = Convert.ToSingle(reader.GetValue(isSocio ? "monto" : "costo"));
+                    nombreCliente = reader["Nombre"].ToString();
+                    lblMontoAPagarValue.Text = monto.ToString("F2");
+                }
+                else
+                {
+                    lblMontoAPagarValue.Text = "0,00";
+                    nombreCliente = "-";
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al calcular el monto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblMontoAPagarValue.Text = "0,00";
+                nombreCliente = "-";
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+
+            lblCliente.Text = "Cliente: " + nombreCliente;
+
+            // Habilitar btnPagar solo si hay datos válidos
+            btnPagar.Enabled = !string.IsNullOrEmpty(nombreCliente) && !nombreCliente.Equals("-") &&
+                                  (isSocio && lblMontoAPagarValue.Text != "0.00") ||
+                                  (!isSocio && cboActividades.SelectedIndex >= 0);
+        }
+
+        private void cboActividades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (opNoSocio.Checked)
+            {
+                ActualizarMontoAPagar();
+            }
+        }
+
+        private void txtDNI_TextChanged(object sender, EventArgs e)
+        {
+            ActualizarMontoAPagar();
+        }
+
+        private bool EsPagoValido(out string mensajeError)
+        {
+            if (opSocio.Checked)
+            {
+                if (cboActividades.SelectedIndex >= 0)
+                {
+                    mensajeError = "Un socio no puede pagar una actividad.";
+                    return false;
+                }
+            }
+            else
+            {
+                if (cboActividades.SelectedIndex < 0)
+                {
+                    mensajeError = "Seleccione una actividad para continuar.";
+                    return false;
+                }
+            }
+
+            mensajeError = "";
+            return true;
         }
     }
 }

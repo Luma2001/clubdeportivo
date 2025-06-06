@@ -38,13 +38,15 @@
             btnPagar = new Button();
             btnComprobante = new Button();
             btnVolver = new Button();
-            labelApellido = new Label();
-            textApellido = new TextBox();
             groupBox2 = new GroupBox();
             opNoSocio = new RadioButton();
             opSocio = new RadioButton();
             cboActividades = new ComboBox();
             lblActividad = new Label();
+            lblMontoAPagar = new Label();
+            lblMontoAPagarValue = new Label();
+            lblDolarIcon = new Label();
+            lblCliente = new Label();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -65,7 +67,7 @@
             // 
             labelDNI.AutoSize = true;
             labelDNI.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
-            labelDNI.Location = new Point(129, 75);
+            labelDNI.Location = new Point(157, 77);
             labelDNI.Margin = new Padding(2, 0, 2, 0);
             labelDNI.Name = "labelDNI";
             labelDNI.Size = new Size(158, 15);
@@ -119,9 +121,11 @@
             txtDNI.Name = "txtDNI";
             txtDNI.Size = new Size(187, 23);
             txtDNI.TabIndex = 7;
+            txtDNI.TextChanged += txtDNI_TextChanged;
             // 
             // btnPagar
             // 
+            btnPagar.Enabled = false;
             btnPagar.Location = new Point(405, 197);
             btnPagar.Margin = new Padding(2);
             btnPagar.Name = "btnPagar";
@@ -157,26 +161,6 @@
             btnVolver.Text = "VOLVER";
             btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
-            // 
-            // labelApellido
-            // 
-            labelApellido.AutoSize = true;
-            labelApellido.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
-            labelApellido.Location = new Point(129, 109);
-            labelApellido.Margin = new Padding(2, 0, 2, 0);
-            labelApellido.Name = "labelApellido";
-            labelApellido.Size = new Size(111, 15);
-            labelApellido.TabIndex = 11;
-            labelApellido.Text = "Ingrese Apellido";
-            // 
-            // textApellido
-            // 
-            textApellido.Location = new Point(346, 109);
-            textApellido.Margin = new Padding(2);
-            textApellido.Name = "textApellido";
-            textApellido.ShortcutsEnabled = false;
-            textApellido.Size = new Size(187, 23);
-            textApellido.TabIndex = 12;
             // 
             // groupBox2
             // 
@@ -224,22 +208,62 @@
             // 
             cboActividades.Enabled = false;
             cboActividades.FormattingEnabled = true;
-            cboActividades.Location = new Point(347, 147);
+            cboActividades.Location = new Point(345, 118);
             cboActividades.Name = "cboActividades";
             cboActividades.Size = new Size(188, 23);
             cboActividades.TabIndex = 14;
+            cboActividades.SelectedIndexChanged += cboActividades_SelectedIndexChanged;
             // 
             // lblActividad
             // 
             lblActividad.AutoSize = true;
             lblActividad.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
             lblActividad.ForeColor = SystemColors.ActiveCaption;
-            lblActividad.Location = new Point(133, 149);
+            lblActividad.Location = new Point(250, 118);
             lblActividad.Margin = new Padding(2, 0, 2, 0);
             lblActividad.Name = "lblActividad";
             lblActividad.Size = new Size(64, 15);
             lblActividad.TabIndex = 15;
             lblActividad.Text = "Actividad";
+            // 
+            // lblMontoAPagar
+            // 
+            lblMontoAPagar.AutoSize = true;
+            lblMontoAPagar.Location = new Point(192, 272);
+            lblMontoAPagar.Name = "lblMontoAPagar";
+            lblMontoAPagar.Size = new Size(85, 15);
+            lblMontoAPagar.TabIndex = 16;
+            lblMontoAPagar.Text = "Monto a pagar";
+            // 
+            // lblMontoAPagarValue
+            // 
+            lblMontoAPagarValue.AutoSize = true;
+            lblMontoAPagarValue.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMontoAPagarValue.ForeColor = Color.MediumOrchid;
+            lblMontoAPagarValue.Location = new Point(206, 235);
+            lblMontoAPagarValue.Name = "lblMontoAPagarValue";
+            lblMontoAPagarValue.Size = new Size(0, 37);
+            lblMontoAPagarValue.TabIndex = 17;
+            // 
+            // lblDolarIcon
+            // 
+            lblDolarIcon.AutoSize = true;
+            lblDolarIcon.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDolarIcon.ForeColor = Color.MediumOrchid;
+            lblDolarIcon.Location = new Point(192, 245);
+            lblDolarIcon.Name = "lblDolarIcon";
+            lblDolarIcon.Size = new Size(23, 25);
+            lblDolarIcon.TabIndex = 18;
+            lblDolarIcon.Text = "$";
+            // 
+            // lblCliente
+            // 
+            lblCliente.AutoSize = true;
+            lblCliente.Location = new Point(192, 210);
+            lblCliente.Name = "lblCliente";
+            lblCliente.Size = new Size(47, 15);
+            lblCliente.TabIndex = 19;
+            lblCliente.Text = "Cliente:";
             // 
             // Cobrar
             // 
@@ -247,11 +271,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.PowderBlue;
             ClientSize = new Size(560, 298);
+            Controls.Add(lblCliente);
+            Controls.Add(lblDolarIcon);
+            Controls.Add(lblMontoAPagarValue);
+            Controls.Add(lblMontoAPagar);
             Controls.Add(lblActividad);
             Controls.Add(cboActividades);
             Controls.Add(groupBox2);
-            Controls.Add(textApellido);
-            Controls.Add(labelApellido);
             Controls.Add(btnVolver);
             Controls.Add(btnComprobante);
             Controls.Add(btnPagar);
@@ -283,12 +309,14 @@
         private Button btnPagar;
         private Button btnComprobante;
         private Button btnVolver;
-        private Label labelApellido;
-        private TextBox textApellido;
         private GroupBox groupBox2;
         private RadioButton opNoSocio;
         private RadioButton opSocio;
         private ComboBox cboActividades;
         private Label lblActividad;
+        private Label lblMontoAPagar;
+        private Label lblMontoAPagarValue;
+        private Label lblDolarIcon;
+        private Label lblCliente;
     }
 }
