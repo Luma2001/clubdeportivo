@@ -1,14 +1,6 @@
 ﻿using CludDeportivo.Datos;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CludDeportivo
 {
@@ -17,10 +9,12 @@ namespace CludDeportivo
         //instancia del comprobante
         public Comprobante comprobante = new Comprobante();
 
-
         public Cobrar()
         {
             InitializeComponent();
+            CargarActividades();
+
+            opSocio.Checked = true; // Inicializar como socio
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -30,11 +24,9 @@ namespace CludDeportivo
 
         private void btnComprobante_Click(object sender, EventArgs e)
         {
-
             comprobante.Show(); // Mostrar el formulario después de asignar valores
             comprobante.BringToFront(); // Asegura que esté en primer plano
             this.Hide();
-
         }
 
         private void btnPagar_Click(object sender, EventArgs e)
@@ -55,10 +47,7 @@ namespace CludDeportivo
                     query = "SELECT p.id, CONCAT(p.nombre, ' ', p.apellido) AS CLIENTE, p.direccion, p.fecha_registro, a.costo " +
                         "FROM persona p INNER JOIN actividad a " +
                         "WHERE p.apellido = @apellido AND p.dni = @dni AND p.socio = 0 AND a.id = 1;";
-
                 }
-
-
 
                 sqlCon = Conexion.getInstancia().CrearConexion();
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);
@@ -66,8 +55,6 @@ namespace CludDeportivo
                 // Se agregan los parámetros para evitar errores y mejorar seguridad
                 comando.Parameters.AddWithValue("@apellido", textApellido.Text);
                 comando.Parameters.AddWithValue("@dni", txtDNI.Text);
-
-
 
                 comando.CommandType = CommandType.Text;
                 sqlCon.Open();
@@ -85,8 +72,6 @@ namespace CludDeportivo
                     comprobante.fecha_f = reader.GetDateTime(3);
                     comprobante.monto_f = reader.GetFloat(4);
 
-
-
                     if (optEfvo.Checked == true)
                     {
                         comprobante.forma_f = "Efectivo";
@@ -99,7 +84,6 @@ namespace CludDeportivo
 
                     //_________________________________________________________________________________________
 
-
                     // Cerramos el lector antes de hacer otro comando
                     reader.Close();
 
@@ -109,7 +93,6 @@ namespace CludDeportivo
                     if (opSocio.Checked == true)
                     {
                         updateQuery = "UPDATE cuota SET pagado = true WHERE id_socio = (SELECT id FROM persona WHERE apellido = @apellido AND dni = @dni)";
-                   
 
                         // Crear el comando con la nueva consulta
                         MySqlCommand updateComando = new MySqlCommand(updateQuery, sqlCon);
@@ -129,15 +112,12 @@ namespace CludDeportivo
                         {
                             MessageBox.Show("Error al registrar el pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-
                     }
                     else { MessageBox.Show("Pago registrado correctamente", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Information); }
 
                     //__________________________________________________________________________________________
 
-
                     btnComprobante.Enabled = true;
-
                 }
                 else
                 {
@@ -165,8 +145,6 @@ namespace CludDeportivo
                         MessageBox.Show("Error al registrar el pago en la tabla pago", "AVISO DEL SISTEMA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -178,38 +156,66 @@ namespace CludDeportivo
                 {
                     sqlCon.Close();
                 }
-
             }
         }
 
-        private void txtDNI_TextChanged(object sender, EventArgs e)
+        private void CargarActividades()
         {
+            MySqlConnection sqlCon = new MySqlConnection();
 
+            try
+            {
+                // Abrir conexión
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                // Consulta SQL
+                string query = "SELECT id, nombre, costo FROM actividad";
+
+                MySqlCommand command = new MySqlCommand(query, sqlCon);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // Limpiar combobox antes de cargar las actividades
+                cboActividades.Items.Clear();
+
+                // Leer resultados y agregar al combobox
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32("id");
+                    string nombre = reader.GetString("nombre");
+                    float costo = reader.GetFloat("costo");
+
+                    cboActividades.Items.Add(new { ID = id, Nombre = nombre, Costo = costo });
+                }
+
+                cboActividades.DisplayMember = "Nombre"; // Motrar nombre
+                cboActividades.ValueMember = "ID"; // Usar ID como valor
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar actividades" + ex.Message);
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
         }
 
-        private void textApellido_TextChanged(object sender, EventArgs e)
+        private void CambiarEstadoActividades(object sender, EventArgs e)
         {
-
-        }
-
-        private void optEfvo_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void optTarj_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void opSocio_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void opNoSocio_CheckedChanged(object sender, EventArgs e)
-        {
-
+            if (opSocio.Checked)
+            {
+                cboActividades.Enabled = false;
+                lblActividad.ForeColor = SystemColors.ActiveCaption;
+            }
+            else if (opNoSocio.Checked)
+            {
+                cboActividades.Enabled = true;
+                lblActividad.ForeColor = SystemColors.ControlText;
+            }
         }
     }
 }
