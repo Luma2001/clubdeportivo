@@ -55,10 +55,9 @@
             // logo
             // 
             logo.Image = (Image)resources.GetObject("logo.Image");
-            logo.Location = new Point(15, 7);
-            logo.Margin = new Padding(2);
+            logo.Location = new Point(21, 12);
             logo.Name = "logo";
-            logo.Size = new Size(92, 65);
+            logo.Size = new Size(131, 108);
             logo.SizeMode = PictureBoxSizeMode.StretchImage;
             logo.TabIndex = 1;
             logo.TabStop = false;
@@ -67,10 +66,9 @@
             // 
             labelDNI.AutoSize = true;
             labelDNI.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
-            labelDNI.Location = new Point(157, 77);
-            labelDNI.Margin = new Padding(2, 0, 2, 0);
+            labelDNI.Location = new Point(224, 128);
             labelDNI.Name = "labelDNI";
-            labelDNI.Size = new Size(158, 15);
+            labelDNI.Size = new Size(218, 22);
             labelDNI.TabIndex = 2;
             labelDNI.Text = "Ingrese Número de DNI";
             // 
@@ -81,11 +79,9 @@
             groupBox1.Controls.Add(optEfvo);
             groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = SystemColors.ControlText;
-            groupBox1.Location = new Point(15, 197);
-            groupBox1.Margin = new Padding(2);
+            groupBox1.Location = new Point(21, 328);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(138, 90);
+            groupBox1.Size = new Size(197, 150);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Forma de Pago";
@@ -93,10 +89,9 @@
             // optTarj
             // 
             optTarj.AutoSize = true;
-            optTarj.Location = new Point(12, 56);
-            optTarj.Margin = new Padding(2);
+            optTarj.Location = new Point(17, 93);
             optTarj.Name = "optTarj";
-            optTarj.Size = new Size(73, 23);
+            optTarj.Size = new Size(102, 32);
             optTarj.TabIndex = 1;
             optTarj.TabStop = true;
             optTarj.Text = "Tarjeta";
@@ -105,10 +100,9 @@
             // optEfvo
             // 
             optEfvo.AutoSize = true;
-            optEfvo.Location = new Point(12, 29);
-            optEfvo.Margin = new Padding(2);
+            optEfvo.Location = new Point(17, 48);
             optEfvo.Name = "optEfvo";
-            optEfvo.Size = new Size(80, 23);
+            optEfvo.Size = new Size(114, 32);
             optEfvo.TabIndex = 0;
             optEfvo.TabStop = true;
             optEfvo.Text = "Efectivo";
@@ -116,20 +110,18 @@
             // 
             // txtDNI
             // 
-            txtDNI.Location = new Point(346, 75);
-            txtDNI.Margin = new Padding(2);
+            txtDNI.Location = new Point(494, 125);
             txtDNI.Name = "txtDNI";
-            txtDNI.Size = new Size(187, 23);
+            txtDNI.Size = new Size(265, 31);
             txtDNI.TabIndex = 7;
             txtDNI.TextChanged += txtDNI_TextChanged;
             // 
             // btnPagar
             // 
             btnPagar.Enabled = false;
-            btnPagar.Location = new Point(405, 197);
-            btnPagar.Margin = new Padding(2);
+            btnPagar.Location = new Point(579, 328);
             btnPagar.Name = "btnPagar";
-            btnPagar.Size = new Size(130, 41);
+            btnPagar.Size = new Size(186, 68);
             btnPagar.TabIndex = 8;
             btnPagar.Text = "PAGAR";
             btnPagar.UseVisualStyleBackColor = true;
@@ -139,10 +131,9 @@
             // 
             btnComprobante.Enabled = false;
             btnComprobante.ForeColor = SystemColors.ActiveCaptionText;
-            btnComprobante.Location = new Point(405, 246);
-            btnComprobante.Margin = new Padding(2);
+            btnComprobante.Location = new Point(579, 410);
             btnComprobante.Name = "btnComprobante";
-            btnComprobante.Size = new Size(130, 41);
+            btnComprobante.Size = new Size(186, 68);
             btnComprobante.TabIndex = 9;
             btnComprobante.Text = "COMPROBANTE";
             btnComprobante.UseVisualStyleBackColor = true;
@@ -153,10 +144,9 @@
             btnVolver.BackColor = Color.DarkCyan;
             btnVolver.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnVolver.ForeColor = SystemColors.ButtonHighlight;
-            btnVolver.Location = new Point(405, 7);
-            btnVolver.Margin = new Padding(2);
+            btnVolver.Location = new Point(579, 12);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(127, 30);
+            btnVolver.Size = new Size(181, 50);
             btnVolver.TabIndex = 10;
             btnVolver.Text = "VOLVER";
             btnVolver.UseVisualStyleBackColor = false;
@@ -169,11 +159,9 @@
             groupBox2.Controls.Add(opSocio);
             groupBox2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox2.ForeColor = SystemColors.ControlText;
-            groupBox2.Location = new Point(129, 7);
-            groupBox2.Margin = new Padding(2);
+            groupBox2.Location = new Point(184, 12);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(186, 46);
+            groupBox2.Size = new Size(266, 77);
             groupBox2.TabIndex = 13;
             groupBox2.TabStop = false;
             groupBox2.Text = "Seleccionar";
@@ -181,10 +169,9 @@
             // opNoSocio
             // 
             opNoSocio.AutoSize = true;
-            opNoSocio.Location = new Point(97, 20);
-            opNoSocio.Margin = new Padding(2);
+            opNoSocio.Location = new Point(139, 33);
             opNoSocio.Name = "opNoSocio";
-            opNoSocio.Size = new Size(88, 23);
+            opNoSocio.Size = new Size(122, 32);
             opNoSocio.TabIndex = 1;
             opNoSocio.TabStop = true;
             opNoSocio.Text = "No Socio";
@@ -194,10 +181,9 @@
             // opSocio
             // 
             opSocio.AutoSize = true;
-            opSocio.Location = new Point(4, 20);
-            opSocio.Margin = new Padding(2);
+            opSocio.Location = new Point(6, 33);
             opSocio.Name = "opSocio";
-            opSocio.Size = new Size(64, 23);
+            opSocio.Size = new Size(88, 32);
             opSocio.TabIndex = 0;
             opSocio.TabStop = true;
             opSocio.Text = "Socio";
@@ -208,9 +194,10 @@
             // 
             cboActividades.Enabled = false;
             cboActividades.FormattingEnabled = true;
-            cboActividades.Location = new Point(345, 118);
+            cboActividades.Location = new Point(493, 197);
+            cboActividades.Margin = new Padding(4, 5, 4, 5);
             cboActividades.Name = "cboActividades";
-            cboActividades.Size = new Size(188, 23);
+            cboActividades.Size = new Size(267, 33);
             cboActividades.TabIndex = 14;
             cboActividades.SelectedIndexChanged += cboActividades_SelectedIndexChanged;
             // 
@@ -219,19 +206,19 @@
             lblActividad.AutoSize = true;
             lblActividad.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
             lblActividad.ForeColor = SystemColors.ActiveCaption;
-            lblActividad.Location = new Point(250, 118);
-            lblActividad.Margin = new Padding(2, 0, 2, 0);
+            lblActividad.Location = new Point(357, 197);
             lblActividad.Name = "lblActividad";
-            lblActividad.Size = new Size(64, 15);
+            lblActividad.Size = new Size(92, 22);
             lblActividad.TabIndex = 15;
             lblActividad.Text = "Actividad";
             // 
             // lblMontoAPagar
             // 
             lblMontoAPagar.AutoSize = true;
-            lblMontoAPagar.Location = new Point(192, 272);
+            lblMontoAPagar.Location = new Point(274, 453);
+            lblMontoAPagar.Margin = new Padding(4, 0, 4, 0);
             lblMontoAPagar.Name = "lblMontoAPagar";
-            lblMontoAPagar.Size = new Size(85, 15);
+            lblMontoAPagar.Size = new Size(131, 25);
             lblMontoAPagar.TabIndex = 16;
             lblMontoAPagar.Text = "Monto a pagar";
             // 
@@ -240,9 +227,10 @@
             lblMontoAPagarValue.AutoSize = true;
             lblMontoAPagarValue.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblMontoAPagarValue.ForeColor = Color.MediumOrchid;
-            lblMontoAPagarValue.Location = new Point(206, 235);
+            lblMontoAPagarValue.Location = new Point(294, 392);
+            lblMontoAPagarValue.Margin = new Padding(4, 0, 4, 0);
             lblMontoAPagarValue.Name = "lblMontoAPagarValue";
-            lblMontoAPagarValue.Size = new Size(0, 37);
+            lblMontoAPagarValue.Size = new Size(0, 55);
             lblMontoAPagarValue.TabIndex = 17;
             // 
             // lblDolarIcon
@@ -250,27 +238,29 @@
             lblDolarIcon.AutoSize = true;
             lblDolarIcon.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDolarIcon.ForeColor = Color.MediumOrchid;
-            lblDolarIcon.Location = new Point(192, 245);
+            lblDolarIcon.Location = new Point(270, 408);
+            lblDolarIcon.Margin = new Padding(4, 0, 4, 0);
             lblDolarIcon.Name = "lblDolarIcon";
-            lblDolarIcon.Size = new Size(23, 25);
+            lblDolarIcon.Size = new Size(34, 40);
             lblDolarIcon.TabIndex = 18;
             lblDolarIcon.Text = "$";
             // 
             // lblCliente
             // 
             lblCliente.AutoSize = true;
-            lblCliente.Location = new Point(192, 210);
+            lblCliente.Location = new Point(274, 350);
+            lblCliente.Margin = new Padding(4, 0, 4, 0);
             lblCliente.Name = "lblCliente";
-            lblCliente.Size = new Size(47, 15);
+            lblCliente.Size = new Size(69, 25);
             lblCliente.TabIndex = 19;
             lblCliente.Text = "Cliente:";
             // 
             // Cobrar
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.PowderBlue;
-            ClientSize = new Size(560, 298);
+            ClientSize = new Size(800, 497);
             Controls.Add(lblCliente);
             Controls.Add(lblDolarIcon);
             Controls.Add(lblMontoAPagarValue);
@@ -285,7 +275,6 @@
             Controls.Add(groupBox1);
             Controls.Add(labelDNI);
             Controls.Add(logo);
-            Margin = new Padding(2);
             Name = "Cobrar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sección Cobranza";

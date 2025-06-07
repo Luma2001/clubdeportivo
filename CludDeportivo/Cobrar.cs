@@ -51,37 +51,82 @@ namespace CludDeportivo
 
                 if (opSocio.Checked)
                 {
-                    // Registrar pago de cuota para socios
-                    string updateQuery = "UPDATE cuota SET pagado = true WHERE id_socio = (SELECT id FROM persona WHERE dni = @dni)";
-
-                    MySqlCommand updateCommand = new MySqlCommand(updateQuery, sqlCon);
-
-                    updateCommand.Parameters.AddWithValue("@dni", txtDNI.Text);
-
-                    int filasAfectadas = updateCommand.ExecuteNonQuery();
-
-                    if (filasAfectadas > 0)
+                    using (MySqlTransaction transaction = sqlCon.BeginTransaction()) //para poder agrupar varias consultas SQL y asegurar que todas se ejecuten correctamente antes de confirmar los cambios en la base de datos
                     {
-                        // Asignar datos al comprobante
-                        comprobante.cliente_f = lblCliente.Text.Replace("Cliente: ", "");
-                        comprobante.direccion_f = ""; // Obtener dirección desde BD
-                        comprobante.fecha_f = DateTime.Now; // Puedes usar fecha_vencimiento si lo tienes
-                        comprobante.monto_f = monto;
-                        comprobante.forma_f = optEfvo.Checked ? "Efectivo" : "Tarjeta";
-                        comprobante.tipo_pago_f = "Cuota";
+                        //Registrar pago y fecha de pago de cuota para socios
+                        MySqlCommand updateCuotaCommand = new MySqlCommand(
+                            "UPDATE cuota SET pagado = true, fecha_pago = current_time() WHERE id_socio = (SELECT id FROM persona WHERE dni = @dni)", sqlCon, transaction);
 
-                        // Limpiar formulario
-                        txtDNI.Text = "";
-                        lblCliente.Text = "Cliente: -";
-                        lblMontoAPagarValue.Text = "0,00";
+                        updateCuotaCommand.Parameters.AddWithValue("@dni", txtDNI.Text);
+                        int filasAfectadasCuota = updateCuotaCommand.ExecuteNonQuery(); //devuelve cant de filas afectadas
 
-                        // Mensaje de confirmación
-                        MessageBox.Show("Pago registrado correcamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Actualiza fecha último pago en tabla persona
+                        MySqlCommand updatePersonaCommand = new MySqlCommand(
+                            "UPDATE persona SET fecha_ult_pago = current_time() WHERE dni = @dni", sqlCon, transaction);
+
+                        updatePersonaCommand.Parameters.AddWithValue("@dni", txtDNI.Text);
+                        int filasAfectadasPersona = updatePersonaCommand.ExecuteNonQuery(); //devuelve cant de filas afectadas
+
+                        //Verificamos o cancelamos los cambios en la transacción
+                        //Ambas filas deben ser mayor a 0 para confirmar la transacción o se cancela
+                        if (filasAfectadasCuota > 0 && filasAfectadasPersona > 0)
+                        {
+                            transaction.Commit();
+                            // Asignar datos al comprobante
+                            comprobante.cliente_f = lblCliente.Text.Replace("Cliente: ", "");
+                            comprobante.direccion_f = ""; // Obtener dirección desde BD
+                            comprobante.fecha_f = DateTime.Now; // Puedes usar fecha_vencimiento si lo tienes
+                            comprobante.monto_f = monto;
+                            comprobante.forma_f = optEfvo.Checked ? "Efectivo" : "Tarjeta";
+                            comprobante.tipo_pago_f = "Cuota";
+
+                            // Limpiar formulario
+                            txtDNI.Text = "";
+                            lblCliente.Text = "Cliente: -";
+                            lblMontoAPagarValue.Text = "0,00";
+
+                            // Mensaje de confirmación
+                            MessageBox.Show("Pago registrado correcamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Pago registrado correctamente y fecha de pago actualizada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("No se encontró cuota pendiente o error al actualizar la fecha de pago.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
                     }
-                    else
-                    {
-                        MessageBox.Show("No se encontró cuota pendiente para este socio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    //// Registrar pago de cuota para socios
+                    //string updateQuery = "UPDATE cuota SET pagado = true, fecha_pago = current_time() WHERE id_socio = (SELECT id FROM persona WHERE dni = @dni)";
+
+                    //MySqlCommand updateCommand = new MySqlCommand(updateQuery, sqlCon);
+
+                    //updateCommand.Parameters.AddWithValue("@dni", txtDNI.Text);
+
+                    //int filasAfectadas = updateCommand.ExecuteNonQuery();
+
+                    //if (filasAfectadas > 0)
+                    //{
+                    //    // Asignar datos al comprobante
+                    //    comprobante.cliente_f = lblCliente.Text.Replace("Cliente: ", "");
+                    //    comprobante.direccion_f = ""; // Obtener dirección desde BD
+                    //    comprobante.fecha_f = DateTime.Now; // Puedes usar fecha_vencimiento si lo tienes
+                    //    comprobante.monto_f = monto;
+                    //    comprobante.forma_f = optEfvo.Checked ? "Efectivo" : "Tarjeta";
+                    //    comprobante.tipo_pago_f = "Cuota";
+
+                    //    // Limpiar formulario
+                    //    txtDNI.Text = "";
+                    //    lblCliente.Text = "Cliente: -";
+                    //    lblMontoAPagarValue.Text = "0,00";
+
+                    //    // Mensaje de confirmación
+                    //    MessageBox.Show("Pago registrado correcamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("No se encontró cuota pendiente para este socio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //}
                 }
                 else
                 {

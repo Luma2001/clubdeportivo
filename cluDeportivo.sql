@@ -25,6 +25,7 @@ use ClubDeportivo;
 	socio boolean,
 	aptoFisico boolean,
 	fecha_registro timestamp default current_timestamp,
+    fecha_ult_pago date,
 	constraint primary key(id)
 	);
 	insert into persona(id,nombre,apellido,dni,direccion,socio,aptoFisico, fecha_registro) values
@@ -48,6 +49,8 @@ use ClubDeportivo;
 	('Natación',15000),
 	('Tenis',10000),
 	('Fútbol',12000);
+
+
 
 
 /*Creamos tabla horario para asignar día y hora de actividad*/
@@ -76,14 +79,23 @@ use ClubDeportivo;
 	fecha_vencimiento date,
     monto float default 100000,
 	pagado boolean default false,
+    fecha_pago date,
 	foreign key (id_socio) references persona(id)
-	); 	-- Al fondo creamos trigger para generar la primera cuota 
-		-- y luego creamos un evento programado para generar mensualmente las cuotas
+	); 	-- Al fondo creamos trigger para generar cuota membresia
+		
 	insert into cuota(id_socio,fecha_vencimiento,pagado) values
 	(103,'2025-05-29',0),
     (105,'2025-05-28',0),
     (106,'2025-05-30',0);
-
+    
+    create table cuotas_pendientes(
+	id int primary key auto_increment,
+	id_socio int,
+	fecha_vencimiento date,
+    foreign key (id_socio) references persona(id)
+	);-- creamos esta tabla para que se actualice cada vez que persona actualiza fecha_ult_pago
+	-- luego creamos procedimiento para pasar estas cuotas a la tabla cuota. 
+    -- Se debe realizar así para que no entre en conflicto con la transaction de C#
 
 
 /*Creamos tabla pago, para registrar pagos no-socio*/
@@ -95,17 +107,31 @@ use ClubDeportivo;
 	constraint primary key(id),
 	constraint fk_pago foreign key(idPersona) references persona(id));
 
+-- _____________________________________Procedimientos_________________________________________ --
 
 /*Creamos procedimiento para el login*/
 delimiter //
-	create procedure login(in usu varchar(20), in pass varchar(12))
-	begin /*el procedimiento una vez que valida los datos me indica si está activo o no*/
+CREATE PROCEDURE login(IN usu VARCHAR(20), IN pass VARCHAR(12))
+BEGIN -- el procedimiento una vez que valida los datos me indica si está activo o no
 		select nombre, activo from usuario where nombre = usu and clave = pass;
-	end //
+		INSERT INTO cuota (id_socio, fecha_vencimiento, pagado)
+        SELECT id_socio, fecha_vencimiento, FALSE FROM cuotas_pendientes;
 
-	call login("emma", "123456")//
-	call login("admin", "123456")//
-	call login("dato1", "dato2")//
+        DELETE FROM cuotas_pendientes;
+
+END//
+
+    
+    
+    
+    
+	
+        
+	
+
+-- call login("emma", "123456")//
+-- call login("admin", "123456")//
+-- call login("dato1", "dato2")//
 
 
 /*Creamos procedimiento para NuevoRegistro*/
@@ -139,41 +165,75 @@ delimiter //
 		END IF;
 	END //
 
-
-/*Creando trigger para generar primera cuota del socio*/
+-- _________________________________________Triggers____________________________________________--
+/*Creando trigger para generar cuota membresía del socio*/
 	CREATE TRIGGER generar_cuota
 	AFTER INSERT ON persona
 	FOR EACH ROW
 	BEGIN
 		DECLARE es_socio BOOLEAN;
 
-	-- Verificar si la persona asociada es un socio
+	-- Verificar si la persona es un socio
 		SELECT socio INTO es_socio FROM persona WHERE id = NEW.id;
 		
 	-- Si la persona es socio, se genera la cuota
 		IF es_socio = TRUE THEN
 			INSERT INTO cuota (id_socio, fecha_vencimiento, pagado)
-			VALUES (NEW.id, DATE_ADD(NEW.fecha_registro, INTERVAL 1 MONTH), FALSE);
+			VALUES 	(NEW.id, NEW.fecha_registro, false);
 		END IF;
 	END//
     
+/*Creando trigger para generar cuota automáticamente cuando se actualiza fecha_ult_pago en persona*/
+CREATE TRIGGER generar_cuota_al_actualizar_pago
+AFTER UPDATE ON persona
+FOR EACH ROW
+BEGIN
+    -- Solo generar la nueva cuota si el pago se realizó (fecha_ult_pago cambió)
+    IF NEW.fecha_ult_pago IS NOT NULL THEN
+        INSERT INTO cuotas_pendientes (id_socio, fecha_vencimiento)
+        VALUES (
+            NEW.id, 
+            CASE 
+                WHEN NEW.fecha_ult_pago <= (SELECT fecha_vencimiento FROM cuota WHERE id_socio = NEW.id ORDER BY fecha_vencimiento DESC LIMIT 1)
+                THEN DATE_ADD((SELECT fecha_vencimiento FROM cuota WHERE id_socio = NEW.id ORDER BY fecha_vencimiento DESC LIMIT 1),INTERVAL 1 MONTH)
+                ELSE DATE_ADD(NEW.fecha_ult_pago, INTERVAL 1 MONTH)
+            END
+        );
+    END IF;
+END//
+
+
+-- __________________________________Creación Evento_______________________________ --
+/*
+CREATE EVENT procesar_cuotas_pendientes
+		ON SCHEDULE EVERY 1 HOUR
+		DO
+		BEGIN
+			INSERT INTO cuota (id_socio, fecha_vencimiento, pagado)
+			SELECT id_socio, fecha_vencimiento, FALSE FROM cuotas_pendientes;
+			DELETE FROM cuotas_pendientes; -- Limpiamos la tabla auxiliar
+		END//
+show events//
+CALL procesar_cuotas_pendientes; */
     
-/*Creamos eventos para generar cuotas mensuales*/   
+    
+/*Creamos eventos para generar cuotas mensuales: NO FUNCIONA COMO ESPERAMOS, NO SE UTILIZA   
 	CREATE EVENT generar_cuotas_mensuales
 	ON SCHEDULE EVERY 1 MONTH
 	STARTS CURRENT_TIMESTAMP
 	DO
 	BEGIN
 		INSERT INTO cuota (id_socio, fecha_vencimiento, pagado)
-		SELECT id_socio, DATE_ADD(fecha_vencimiento, INTERVAL 1 MONTH), FALSE
+		SELECT id_socio, DATE_ADD(fecha_pago, INTERVAL 1 MONTH), FALSE
 		FROM cuotas
 		WHERE pagado = TRUE; -- Solo se crean nuevas cuotas para quienes ya pagaron la anterior
 	END// 
-    
-    
-
-
+    ,
+					
 	DELIMITER ;
+show events;
+CALL generar_cuotas_mensuales;*/
+
 
 -- --------------------------------QUERIES----------------------------------------------------------------
 /*Probando query para llamar lista de deudores hasta la fecha actual*/
@@ -193,7 +253,8 @@ SELECT p.id, CONCAT(p.nombre, ' ', p.apellido) AS CLIENTE, p.direccion, p.fecha_
                    FROM persona p inner join actividad a
                    WHERE p.apellido = "Eterno" AND p.dni = 23437897 AND p.socio = false AND a.id=1;
 
-
+/*Probando query para actualizar estado de pagado y fecha_pago en la tabla cuota*/
+UPDATE cuota SET pagado = true, fecha_pago = current_time() WHERE id_socio = (SELECT id FROM persona WHERE dni = 25999944);
 
 
 /*Por ahora sólo tenemos un tipo de rol no es necesario
