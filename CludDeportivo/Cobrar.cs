@@ -17,6 +17,20 @@ namespace CludDeportivo
             opSocio.Checked = true; // Inicializar como socio
         }
 
+
+
+        public Cobrar(string dni)
+        {
+            InitializeComponent();
+            CargarActividades();
+
+            opSocio.Checked = true; // Inicializar como socio
+
+            // Asignar valores recibidos a los controles del formulario
+            txtDNI.Text = dni;
+
+        }
+
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Hide();

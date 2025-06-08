@@ -31,12 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListaDeudores));
             label1 = new Label();
             planillaDeudores = new DataGridView();
-            SOCIO = new DataGridViewTextBoxColumn();
+            DNI = new DataGridViewTextBoxColumn();
+            APELLIDO = new DataGridViewTextBoxColumn();
+            NOMBRE = new DataGridViewTextBoxColumn();
+            MONTO = new DataGridViewTextBoxColumn();
             ENCIMIENTO = new DataGridViewTextBoxColumn();
             logo = new PictureBox();
             panel1 = new Panel();
             btnVolver = new Button();
-            btnCobrar = new Button();
+            labelInfo = new Label();
             ((System.ComponentModel.ISupportInitialize)planillaDeudores).BeginInit();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             panel1.SuspendLayout();
@@ -57,20 +60,42 @@
             // 
             planillaDeudores.BackgroundColor = SystemColors.ButtonFace;
             planillaDeudores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            planillaDeudores.Columns.AddRange(new DataGridViewColumn[] { SOCIO, ENCIMIENTO });
-            planillaDeudores.Location = new Point(229, 143);
+            planillaDeudores.Columns.AddRange(new DataGridViewColumn[] { DNI, APELLIDO, NOMBRE, MONTO, ENCIMIENTO });
+            planillaDeudores.Location = new Point(29, 157);
             planillaDeudores.Name = "planillaDeudores";
             planillaDeudores.RowHeadersWidth = 62;
-            planillaDeudores.Size = new Size(545, 286);
+            planillaDeudores.Size = new Size(806, 286);
             planillaDeudores.TabIndex = 2;
+            planillaDeudores.CellClick += CellClick;
             planillaDeudores.CellContentClick += planillaDeudores_CellContentClick;
             // 
-            // SOCIO
+            // DNI
             // 
-            SOCIO.HeaderText = "SOCIO";
-            SOCIO.MinimumWidth = 8;
-            SOCIO.Name = "SOCIO";
-            SOCIO.Width = 150;
+            DNI.HeaderText = "DNI";
+            DNI.MinimumWidth = 8;
+            DNI.Name = "DNI";
+            DNI.Width = 150;
+            // 
+            // APELLIDO
+            // 
+            APELLIDO.HeaderText = "APELLIDO";
+            APELLIDO.MinimumWidth = 8;
+            APELLIDO.Name = "APELLIDO";
+            APELLIDO.Width = 150;
+            // 
+            // NOMBRE
+            // 
+            NOMBRE.HeaderText = "NOMBRE";
+            NOMBRE.MinimumWidth = 8;
+            NOMBRE.Name = "NOMBRE";
+            NOMBRE.Width = 150;
+            // 
+            // MONTO
+            // 
+            MONTO.HeaderText = "MONTO";
+            MONTO.MinimumWidth = 8;
+            MONTO.Name = "MONTO";
+            MONTO.Width = 150;
             // 
             // ENCIMIENTO
             // 
@@ -82,7 +107,7 @@
             // logo
             // 
             logo.Image = (Image)resources.GetObject("logo.Image");
-            logo.Location = new Point(22, 21);
+            logo.Location = new Point(49, 21);
             logo.Name = "logo";
             logo.Size = new Size(115, 99);
             logo.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -94,17 +119,18 @@
             panel1.BackColor = Color.DarkCyan;
             panel1.Controls.Add(label1);
             panel1.ForeColor = SystemColors.ButtonHighlight;
-            panel1.Location = new Point(133, 21);
+            panel1.Location = new Point(160, 21);
             panel1.Name = "panel1";
             panel1.Size = new Size(641, 99);
             panel1.TabIndex = 6;
+            panel1.Paint += panel1_Paint;
             // 
             // btnVolver
             // 
             btnVolver.BackColor = Color.DarkCyan;
             btnVolver.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnVolver.ForeColor = SystemColors.ButtonHighlight;
-            btnVolver.Location = new Point(22, 379);
+            btnVolver.Location = new Point(49, 463);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(182, 50);
             btnVolver.TabIndex = 11;
@@ -112,25 +138,22 @@
             btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
             // 
-            // btnCobrar
+            // labelInfo
             // 
-            btnCobrar.BackColor = Color.DarkCyan;
-            btnCobrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCobrar.ForeColor = SystemColors.ButtonHighlight;
-            btnCobrar.Location = new Point(22, 287);
-            btnCobrar.Name = "btnCobrar";
-            btnCobrar.Size = new Size(182, 50);
-            btnCobrar.TabIndex = 12;
-            btnCobrar.Text = "COBRAR";
-            btnCobrar.UseVisualStyleBackColor = false;
-            btnCobrar.Click += btnCobrar_Click;
+            labelInfo.AutoSize = true;
+            labelInfo.Font = new Font("Simple Indust Outline", 9F, FontStyle.Bold, GraphicsUnit.Point, 178);
+            labelInfo.Location = new Point(346, 472);
+            labelInfo.Name = "labelInfo";
+            labelInfo.Size = new Size(489, 33);
+            labelInfo.TabIndex = 12;
+            labelInfo.Text = "Presione sobre el Socio que desea pagar";
             // 
             // ListaDeudores
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btnCobrar);
+            ClientSize = new Size(847, 535);
+            Controls.Add(labelInfo);
             Controls.Add(btnVolver);
             Controls.Add(panel1);
             Controls.Add(logo);
@@ -144,6 +167,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -152,9 +176,13 @@
         private DataGridView planillaDeudores;
         private PictureBox logo;
         private Panel panel1;
-        private DataGridViewTextBoxColumn SOCIO;
-        private DataGridViewTextBoxColumn ENCIMIENTO;
         private Button btnVolver;
-        private Button btnCobrar;
+        private DataGridViewTextBoxColumn DNI;
+        private DataGridViewTextBoxColumn APELLIDO;
+        private DataGridViewTextBoxColumn NOMBRE;
+        private DataGridViewTextBoxColumn MONTO;
+        private DataGridViewTextBoxColumn ENCIMIENTO;
+        private Label label2;
+        private Label labelInfo;
     }
 }

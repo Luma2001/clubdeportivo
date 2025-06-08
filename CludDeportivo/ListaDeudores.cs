@@ -34,9 +34,8 @@ namespace CludDeportivo
                 //OBTENCIÓN DE LA CONEXIÓN Y CONSULTA SQL
                 string query;
                 sqlCon = Conexion.getInstancia().CrearConexion();
-                query = "Select concat(p.nombre,' ', p.apellido) as SOCIO, c.fecha_vencimiento as VENCIMIENTO from persona p inner join cuota c on p.id = c.id_socio where c.fecha_vencimiento <= curdate() and pagado=false order by p.apellido;";
-                //+
-                //" where c.fecha_vencimiento <= curdate() and c.pagado=false order by p.apellido;";
+                query = "Select dni, apellido, nombre, c.monto, c.fecha_vencimiento as VENCIMIENTO from persona p inner join cuota c on p.id = c.id_socio where c.fecha_vencimiento <= curdate() and pagado=false order by p.apellido;";
+
                 //PREPARACIÓN Y EJECUCIÓN DEL COMANDO SQL
                 MySqlCommand comando = new MySqlCommand(query, sqlCon);// se crea un MySqlCommand con la consulta y la conexion
                 comando.CommandType = CommandType.Text;//defino tipo de comando como texto
@@ -54,7 +53,10 @@ namespace CludDeportivo
                     {
                         int reglon = planillaDeudores.Rows.Add();
                         planillaDeudores.Rows[reglon].Cells[0].Value = reader.GetString(0);//se asigna valores a cada celda
-                        planillaDeudores.Rows[reglon].Cells[1].Value = reader.GetDateTime(1).ToString("yyyy-MM-dd");
+                        planillaDeudores.Rows[reglon].Cells[1].Value = reader.GetString(1);
+                        planillaDeudores.Rows[reglon].Cells[2].Value = reader.GetString(2);
+                        planillaDeudores.Rows[reglon].Cells[3].Value = reader.GetDecimal(3);
+                        planillaDeudores.Rows[reglon].Cells[4].Value = reader.GetDateTime(4).ToString("yyyy-MM-dd");
 
 
                     }
@@ -92,10 +94,26 @@ namespace CludDeportivo
             this.Hide();
         }
 
-        private void btnCobrar_Click(object sender, EventArgs e)
+        private void btnCobrar_Click(object sender, EventArgs e)//es el botón imprimir
         {
-            Form Cobrar = new Cobrar();
-            Cobrar.ShowDialog();
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) // Asegurar que no se selecciona la cabecera
+            {
+                string dni = planillaDeudores.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+                // Crear y abrir el formulario Cobrar, pasando solo el DNI
+                Cobrar cobrarForm = new Cobrar(dni);
+                cobrarForm.Show();
+            }
         }
     }
 }
