@@ -10,10 +10,11 @@ using System.Windows.Forms;
 
 namespace CludDeportivo
 {
-    public partial class sistema : Form
+    public partial class Sistema : Form
     {
         private string? usuario;
-        public sistema(string? usuario)
+
+        public Sistema(string? usuario)
         {
             InitializeComponent();
             this.usuario = usuario;
@@ -42,7 +43,6 @@ namespace CludDeportivo
         {
             Form Registro = new Registro();
             Registro.ShowDialog();
-
         }
 
         private void buttonDeudor_Click(object sender, EventArgs e)

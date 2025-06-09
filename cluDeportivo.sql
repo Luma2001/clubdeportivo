@@ -100,11 +100,10 @@ use ClubDeportivo;
 
 /*Creamos tabla pago, para registrar pagos no-socio*/
 	create table pago(
-	id int,
+	id int primary key auto_increment,
 	idPersona int,
 	monto float(10) default 15000,
 	fecha date,
-	constraint primary key(id),
 	constraint fk_pago foreign key(idPersona) references persona(id));
 
 -- _____________________________________Procedimientos_________________________________________ --

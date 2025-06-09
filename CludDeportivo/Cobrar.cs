@@ -17,8 +17,6 @@ namespace CludDeportivo
             opSocio.Checked = true; // Inicializar como socio
         }
 
-
-
         public Cobrar(string dni)
         {
             InitializeComponent();
@@ -28,7 +26,6 @@ namespace CludDeportivo
 
             // Asignar valores recibidos a los controles del formulario
             txtDNI.Text = dni;
-
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -89,7 +86,7 @@ namespace CludDeportivo
                             // Asignar datos al comprobante
                             comprobante.cliente_f = lblCliente.Text.Replace("Cliente: ", "");
                             comprobante.direccion_f = ""; // Obtener dirección desde BD
-                            comprobante.fecha_f = DateTime.Now; // Puedes usar fecha_vencimiento si lo tienes
+                            comprobante.fecha_f = DateTime.Now;
                             comprobante.monto_f = monto;
                             comprobante.forma_f = optEfvo.Checked ? "Efectivo" : "Tarjeta";
                             comprobante.tipo_pago_f = "Cuota";
@@ -100,7 +97,6 @@ namespace CludDeportivo
                             lblMontoAPagarValue.Text = "0,00";
 
                             // Mensaje de confirmación
-                            MessageBox.Show("Pago registrado correcamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             MessageBox.Show("Pago registrado correctamente y fecha de pago actualizada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
@@ -108,39 +104,7 @@ namespace CludDeportivo
                             transaction.Rollback();
                             MessageBox.Show("No se encontró cuota pendiente o error al actualizar la fecha de pago.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-
                     }
-                    //// Registrar pago de cuota para socios
-                    //string updateQuery = "UPDATE cuota SET pagado = true, fecha_pago = current_time() WHERE id_socio = (SELECT id FROM persona WHERE dni = @dni)";
-
-                    //MySqlCommand updateCommand = new MySqlCommand(updateQuery, sqlCon);
-
-                    //updateCommand.Parameters.AddWithValue("@dni", txtDNI.Text);
-
-                    //int filasAfectadas = updateCommand.ExecuteNonQuery();
-
-                    //if (filasAfectadas > 0)
-                    //{
-                    //    // Asignar datos al comprobante
-                    //    comprobante.cliente_f = lblCliente.Text.Replace("Cliente: ", "");
-                    //    comprobante.direccion_f = ""; // Obtener dirección desde BD
-                    //    comprobante.fecha_f = DateTime.Now; // Puedes usar fecha_vencimiento si lo tienes
-                    //    comprobante.monto_f = monto;
-                    //    comprobante.forma_f = optEfvo.Checked ? "Efectivo" : "Tarjeta";
-                    //    comprobante.tipo_pago_f = "Cuota";
-
-                    //    // Limpiar formulario
-                    //    txtDNI.Text = "";
-                    //    lblCliente.Text = "Cliente: -";
-                    //    lblMontoAPagarValue.Text = "0,00";
-
-                    //    // Mensaje de confirmación
-                    //    MessageBox.Show("Pago registrado correcamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("No se encontró cuota pendiente para este socio.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //}
                 }
                 else
                 {

@@ -1,6 +1,6 @@
 ﻿namespace CludDeportivo
 {
-    partial class sistema
+    partial class Sistema
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(sistema));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sistema));
             labelTitle = new Label();
             buttonRegistrar = new Button();
             buttonSalir = new Button();
