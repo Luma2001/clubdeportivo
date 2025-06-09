@@ -48,7 +48,6 @@ namespace CludDeportivo
                 //CARGA DE DATOS EN EL DATAGRIDVIEW
                 if (reader.HasRows)//se verifica si tiene registro
                 {
-
                     while (reader.Read())
                     {
                         int reglon = planillaDeudores.Rows.Add();
@@ -57,8 +56,6 @@ namespace CludDeportivo
                         planillaDeudores.Rows[reglon].Cells[2].Value = reader.GetString(2);
                         planillaDeudores.Rows[reglon].Cells[3].Value = reader.GetDecimal(3);
                         planillaDeudores.Rows[reglon].Cells[4].Value = reader.GetDateTime(4).ToString("yyyy-MM-dd");
-
-
                     }
                 }
                 else
@@ -75,33 +72,11 @@ namespace CludDeportivo
                 if (sqlCon.State == ConnectionState.Open) { sqlCon.Close(); }
                 ;
             }
-
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void planillaDeudores_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Hide();
-        }
-
-        private void btnCobrar_Click(object sender, EventArgs e)//es el botón imprimir
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void CellClick(object sender, DataGridViewCellEventArgs e)

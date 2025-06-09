@@ -55,10 +55,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(60, 14);
-            pictureBox1.Margin = new Padding(2);
+            pictureBox1.Location = new Point(42, 8);
+            pictureBox1.Margin = new Padding(1, 1, 1, 1);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(116, 102);
+            pictureBox1.Size = new Size(81, 61);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 23;
             pictureBox1.TabStop = false;
@@ -67,10 +67,10 @@
             // 
             labelRegistroClientes.AutoSize = true;
             labelRegistroClientes.Font = new Font("Tahoma", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelRegistroClientes.Location = new Point(250, 31);
-            labelRegistroClientes.Margin = new Padding(5, 0, 5, 0);
+            labelRegistroClientes.Location = new Point(175, 19);
+            labelRegistroClientes.Margin = new Padding(4, 0, 4, 0);
             labelRegistroClientes.Name = "labelRegistroClientes";
-            labelRegistroClientes.Size = new Size(510, 58);
+            labelRegistroClientes.Size = new Size(337, 39);
             labelRegistroClientes.TabIndex = 22;
             labelRegistroClientes.Text = "Registro de Clientes";
             // 
@@ -79,10 +79,10 @@
             buttonRegistrar.BackColor = Color.DarkCyan;
             buttonRegistrar.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonRegistrar.ForeColor = Color.White;
-            buttonRegistrar.Location = new Point(735, 484);
-            buttonRegistrar.Margin = new Padding(5);
+            buttonRegistrar.Location = new Point(514, 290);
+            buttonRegistrar.Margin = new Padding(4, 3, 4, 3);
             buttonRegistrar.Name = "buttonRegistrar";
-            buttonRegistrar.Size = new Size(220, 58);
+            buttonRegistrar.Size = new Size(154, 35);
             buttonRegistrar.TabIndex = 21;
             buttonRegistrar.Text = "REGISTRAR";
             buttonRegistrar.UseVisualStyleBackColor = false;
@@ -91,35 +91,31 @@
             // textBoxDireccion
             // 
             textBoxDireccion.ForeColor = SystemColors.ControlText;
-            textBoxDireccion.Location = new Point(570, 335);
-            textBoxDireccion.Margin = new Padding(5);
+            textBoxDireccion.Location = new Point(399, 201);
+            textBoxDireccion.Margin = new Padding(4, 3, 4, 3);
             textBoxDireccion.Name = "textBoxDireccion";
-            textBoxDireccion.Size = new Size(314, 31);
+            textBoxDireccion.Size = new Size(221, 23);
             textBoxDireccion.TabIndex = 20;
-            textBoxDireccion.Text = "Dirección requerido...";
-            textBoxDireccion.Enter += textBoxDireccion_Enter;
-            textBoxDireccion.Leave += textBoxDireccion_Leave;
+            textBoxDireccion.PlaceholderText = "Dirección requerido...";
             // 
             // textBoxDni
             // 
             textBoxDni.ForeColor = SystemColors.ControlText;
-            textBoxDni.Location = new Point(570, 201);
-            textBoxDni.Margin = new Padding(5);
+            textBoxDni.Location = new Point(399, 121);
+            textBoxDni.Margin = new Padding(4, 3, 4, 3);
             textBoxDni.Name = "textBoxDni";
-            textBoxDni.Size = new Size(314, 31);
+            textBoxDni.Size = new Size(221, 23);
             textBoxDni.TabIndex = 19;
-            textBoxDni.Text = "DNI requerido...";
-            textBoxDni.Enter += textBoxDni_Enter;
-            textBoxDni.Leave += textBoxDni_Leave;
+            textBoxDni.PlaceholderText = "DNI requerido...";
             // 
             // labelDireccion
             // 
             labelDireccion.AutoSize = true;
             labelDireccion.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelDireccion.Location = new Point(570, 291);
-            labelDireccion.Margin = new Padding(5, 0, 5, 0);
+            labelDireccion.Location = new Point(399, 175);
+            labelDireccion.Margin = new Padding(4, 0, 4, 0);
             labelDireccion.Name = "labelDireccion";
-            labelDireccion.Size = new Size(138, 24);
+            labelDireccion.Size = new Size(96, 16);
             labelDireccion.TabIndex = 18;
             labelDireccion.Text = "Dirección:";
             // 
@@ -127,56 +123,52 @@
             // 
             labelDni.AutoSize = true;
             labelDni.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelDni.Location = new Point(570, 160);
-            labelDni.Margin = new Padding(5, 0, 5, 0);
+            labelDni.Location = new Point(399, 96);
+            labelDni.Margin = new Padding(4, 0, 4, 0);
             labelDni.Name = "labelDni";
-            labelDni.Size = new Size(62, 24);
+            labelDni.Size = new Size(43, 16);
             labelDni.TabIndex = 17;
             labelDni.Text = "DNI:";
             // 
             // textBoxApellido
             // 
             textBoxApellido.ForeColor = SystemColors.ControlText;
-            textBoxApellido.Location = new Point(118, 335);
-            textBoxApellido.Margin = new Padding(5);
+            textBoxApellido.Location = new Point(83, 201);
+            textBoxApellido.Margin = new Padding(4, 3, 4, 3);
             textBoxApellido.Name = "textBoxApellido";
-            textBoxApellido.Size = new Size(314, 31);
+            textBoxApellido.Size = new Size(221, 23);
             textBoxApellido.TabIndex = 16;
-            textBoxApellido.Text = "Apellido requerido...";
-            textBoxApellido.Enter += textBoxApellido_Enter;
-            textBoxApellido.Leave += textBoxApellido_Leave;
+            textBoxApellido.PlaceholderText = "Apellido requerido...";
             // 
             // labelApellido
             // 
             labelApellido.AutoSize = true;
             labelApellido.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelApellido.Location = new Point(118, 291);
-            labelApellido.Margin = new Padding(5, 0, 5, 0);
+            labelApellido.Location = new Point(83, 175);
+            labelApellido.Margin = new Padding(4, 0, 4, 0);
             labelApellido.Name = "labelApellido";
-            labelApellido.Size = new Size(127, 24);
+            labelApellido.Size = new Size(88, 16);
             labelApellido.TabIndex = 15;
             labelApellido.Text = "Apellido:";
             // 
             // textBoxNombre
             // 
             textBoxNombre.ForeColor = SystemColors.ControlText;
-            textBoxNombre.Location = new Point(118, 201);
-            textBoxNombre.Margin = new Padding(5);
+            textBoxNombre.Location = new Point(83, 121);
+            textBoxNombre.Margin = new Padding(4, 3, 4, 3);
             textBoxNombre.Name = "textBoxNombre";
-            textBoxNombre.Size = new Size(314, 31);
+            textBoxNombre.PlaceholderText = "Nombre requerido...";
+            textBoxNombre.Size = new Size(221, 23);
             textBoxNombre.TabIndex = 14;
-            textBoxNombre.Text = "Nombre requerido...";
-            textBoxNombre.Enter += textBoxNombre_Enter;
-            textBoxNombre.Leave += textBoxNombre_Leave;
             // 
             // labelNombre
             // 
             labelNombre.AutoSize = true;
             labelNombre.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelNombre.Location = new Point(118, 160);
-            labelNombre.Margin = new Padding(5, 0, 5, 0);
+            labelNombre.Location = new Point(83, 96);
+            labelNombre.Margin = new Padding(4, 0, 4, 0);
             labelNombre.Name = "labelNombre";
-            labelNombre.Size = new Size(101, 24);
+            labelNombre.Size = new Size(70, 16);
             labelNombre.TabIndex = 4;
             labelNombre.Text = "Nombre:";
             // 
@@ -184,10 +176,10 @@
             // 
             checkBoxAptoFisico.AutoSize = true;
             checkBoxAptoFisico.Font = new Font("SimSun", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            checkBoxAptoFisico.Location = new Point(570, 429);
-            checkBoxAptoFisico.Margin = new Padding(5);
+            checkBoxAptoFisico.Location = new Point(399, 257);
+            checkBoxAptoFisico.Margin = new Padding(4, 3, 4, 3);
             checkBoxAptoFisico.Name = "checkBoxAptoFisico";
-            checkBoxAptoFisico.Size = new Size(168, 25);
+            checkBoxAptoFisico.Size = new Size(114, 18);
             checkBoxAptoFisico.TabIndex = 3;
             checkBoxAptoFisico.Text = "Apto Físico";
             checkBoxAptoFisico.UseVisualStyleBackColor = true;
@@ -196,24 +188,23 @@
             // 
             checkBoxSocio.AutoSize = true;
             checkBoxSocio.Font = new Font("SimSun-ExtB", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            checkBoxSocio.Location = new Point(118, 429);
-            checkBoxSocio.Margin = new Padding(5);
+            checkBoxSocio.Location = new Point(83, 257);
+            checkBoxSocio.Margin = new Padding(4, 3, 4, 3);
             checkBoxSocio.Name = "checkBoxSocio";
-            checkBoxSocio.Size = new Size(96, 25);
+            checkBoxSocio.Size = new Size(66, 18);
             checkBoxSocio.TabIndex = 2;
             checkBoxSocio.Text = "Socio";
             checkBoxSocio.UseVisualStyleBackColor = true;
-            checkBoxSocio.CheckedChanged += checkBoxSocio_CheckedChanged;
             // 
             // buttonVolver
             // 
             buttonVolver.BackColor = Color.Khaki;
             buttonVolver.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonVolver.ForeColor = Color.Black;
-            buttonVolver.Location = new Point(139, 632);
-            buttonVolver.Margin = new Padding(5);
+            buttonVolver.Location = new Point(97, 379);
+            buttonVolver.Margin = new Padding(4, 3, 4, 3);
             buttonVolver.Name = "buttonVolver";
-            buttonVolver.Size = new Size(288, 72);
+            buttonVolver.Size = new Size(202, 43);
             buttonVolver.TabIndex = 24;
             buttonVolver.Text = "VOLVER";
             buttonVolver.UseVisualStyleBackColor = false;
@@ -224,10 +215,10 @@
             buttonVolver2.BackColor = Color.YellowGreen;
             buttonVolver2.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttonVolver2.ForeColor = Color.Black;
-            buttonVolver2.Location = new Point(118, 484);
-            buttonVolver2.Margin = new Padding(5);
+            buttonVolver2.Location = new Point(83, 290);
+            buttonVolver2.Margin = new Padding(4, 3, 4, 3);
             buttonVolver2.Name = "buttonVolver2";
-            buttonVolver2.Size = new Size(220, 58);
+            buttonVolver2.Size = new Size(154, 35);
             buttonVolver2.TabIndex = 25;
             buttonVolver2.Text = "VOLVER";
             buttonVolver2.UseVisualStyleBackColor = false;
@@ -238,10 +229,10 @@
             label1.AutoSize = true;
             label1.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Red;
-            label1.Location = new Point(431, 208);
-            label1.Margin = new Padding(5, 0, 5, 0);
+            label1.Location = new Point(302, 125);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(23, 24);
+            label1.Size = new Size(16, 16);
             label1.TabIndex = 26;
             label1.Text = "*";
             // 
@@ -250,10 +241,10 @@
             label2.AutoSize = true;
             label2.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Red;
-            label2.Location = new Point(431, 342);
-            label2.Margin = new Padding(5, 0, 5, 0);
+            label2.Location = new Point(302, 205);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(23, 24);
+            label2.Size = new Size(16, 16);
             label2.TabIndex = 27;
             label2.Text = "*";
             // 
@@ -262,10 +253,10 @@
             label3.AutoSize = true;
             label3.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Red;
-            label3.Location = new Point(884, 208);
-            label3.Margin = new Padding(5, 0, 5, 0);
+            label3.Location = new Point(619, 125);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(23, 24);
+            label3.Size = new Size(16, 16);
             label3.TabIndex = 28;
             label3.Text = "*";
             // 
@@ -274,10 +265,10 @@
             label4.AutoSize = true;
             label4.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Red;
-            label4.Location = new Point(884, 342);
-            label4.Margin = new Padding(5, 0, 5, 0);
+            label4.Location = new Point(619, 205);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(23, 24);
+            label4.Size = new Size(16, 16);
             label4.TabIndex = 29;
             label4.Text = "*";
             // 
@@ -286,18 +277,18 @@
             label5.AutoSize = true;
             label5.Font = new Font("SimSun-ExtB", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Red;
-            label5.Location = new Point(735, 430);
-            label5.Margin = new Padding(5, 0, 5, 0);
+            label5.Location = new Point(514, 258);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(23, 24);
+            label5.Size = new Size(16, 16);
             label5.TabIndex = 30;
             label5.Text = "*";
             // 
             // Registro
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1000, 562);
+            ClientSize = new Size(700, 337);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -318,7 +309,7 @@
             Controls.Add(checkBoxAptoFisico);
             Controls.Add(checkBoxSocio);
             Controls.Add(buttonVolver);
-            Margin = new Padding(4);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Registro";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "REGISTRO";

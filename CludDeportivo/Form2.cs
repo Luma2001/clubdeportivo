@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CludDeportivo
+﻿namespace CludDeportivo
 {
     public partial class Sistema : Form
     {
@@ -41,25 +31,25 @@ namespace CludDeportivo
 
         private void buttonRegistrar_Click(object sender, EventArgs e)
         {
-            Form Registro = new Registro();
+            Registro Registro = new Registro();
             Registro.ShowDialog();
         }
 
         private void buttonDeudor_Click(object sender, EventArgs e)
         {
-            Form Listado = new ListaDeudores();
+            ListaDeudores Listado = new ListaDeudores();
             Listado.ShowDialog();
         }
 
         private void buttonCobrar_Click(object sender, EventArgs e)
         {
-            Form Cobrar = new Cobrar();
+            Cobrar Cobrar = new Cobrar();
             Cobrar.ShowDialog();
         }
 
         private void buttonCarnet_Click(object sender, EventArgs e)
         {
-            Form emitirCarnet = new EmitirCarnet();
+            EmitirCarnet emitirCarnet = new EmitirCarnet();
             emitirCarnet.ShowDialog();
         }
     }

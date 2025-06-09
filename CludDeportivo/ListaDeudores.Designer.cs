@@ -54,7 +54,6 @@
             label1.Size = new Size(509, 51);
             label1.TabIndex = 1;
             label1.Text = "LISTADO DE DEUDORES";
-            label1.Click += label1_Click;
             // 
             // planillaDeudores
             // 
@@ -67,7 +66,6 @@
             planillaDeudores.Size = new Size(806, 286);
             planillaDeudores.TabIndex = 2;
             planillaDeudores.CellClick += CellClick;
-            planillaDeudores.CellContentClick += planillaDeudores_CellContentClick;
             // 
             // DNI
             // 
@@ -123,7 +121,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(641, 99);
             panel1.TabIndex = 6;
-            panel1.Paint += panel1_Paint;
             // 
             // btnVolver
             // 

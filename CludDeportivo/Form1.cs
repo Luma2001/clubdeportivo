@@ -28,7 +28,7 @@ namespace CludDeportivo
                 if (usuarioActivo)
                 {
                     MessageBox.Show($"Ingreso exitoso. Bienvenido, {textUser.Text}!", "Mensaje del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Form sistema = new Sistema(textUser.Text);
+                    Sistema sistema = new Sistema(textUser.Text);
 
                     sistema.Show();
                     this.Hide();

@@ -1,13 +1,4 @@
 ﻿using CludDeportivo.Entidades;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CludDeportivo
 {
@@ -80,82 +71,6 @@ namespace CludDeportivo
         private void buttonVolver2_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void checkBoxSocio_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void textBoxNombre_Enter(object sender, EventArgs e)
-        {
-            //Este evento se ejecuta cuando llega el foco
-            if (textBoxNombre.Text == "Nombre requerido...")
-            {
-                textBoxNombre.Text = "";
-            }
-        }
-
-        private void textBoxNombre_Leave(object sender, EventArgs e)
-        {
-            //Este evento se ejecuta cuando se va el foco
-            if (textBoxNombre.Text == "")
-            {
-                textBoxNombre.Text = "Nombre requerido...";
-            }
-        }
-
-        private void textBoxApellido_Enter(object sender, EventArgs e)
-        {
-            //Este evento se ejecuta cuando llega el foco
-            if (textBoxApellido.Text == "Apellido requerido...")
-            {
-                textBoxApellido.Text = "";
-            }
-        }
-
-        private void textBoxApellido_Leave(object sender, EventArgs e)
-        {
-            //Este evento se ejecuta cuando se va el foco
-            if (textBoxApellido.Text == "")
-            {
-                textBoxApellido.Text = "Apellido requerido...";
-            }
-        }
-
-        private void textBoxDni_Enter(object sender, EventArgs e)
-        {
-            //Este evento se ejecuta cuando llega el foco
-            if (textBoxDni.Text == "DNI requerido...")
-            {
-                textBoxDni.Text = "";
-            }
-        }
-
-        private void textBoxDni_Leave(object sender, EventArgs e)
-        {
-            //Este evento se ejecuta cuando se va el foco
-            if (textBoxDni.Text == "")
-            {
-                textBoxDni.Text = "DNI requerido...";
-            }
-        }
-
-        private void textBoxDireccion_Enter(object sender, EventArgs e)
-        {
-            //Este evento se ejecuta cuando llega el foco
-            if (textBoxDireccion.Text == "Dirección requerido...")
-            {
-                textBoxDireccion.Text = "";
-            }
-        }
-
-        private void textBoxDireccion_Leave(object sender, EventArgs e)
-        {
-            //Este evento se ejecuta cuando se va el foco
-            if (textBoxDireccion.Text == "")
-            {
-                textBoxDireccion.Text = "Dirección requerido...";
-            }
         }
     }
 }
