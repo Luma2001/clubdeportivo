@@ -1,9 +1,5 @@
-﻿using MySql.Data.MySqlClient;//referemcia al conector
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.VisualBasic;
+using MySql.Data.MySqlClient;//referemcia al conector
 
 namespace CludDeportivo.Datos
 {
@@ -11,19 +7,91 @@ namespace CludDeportivo.Datos
     {
         //Atributos
         private string baseDatos;
+
         private string servidor;
         private string puerto;
         private string usuario;
         private string clave;
         private static Conexion? con = null;
+        private static readonly string rutaConfig = "config.ini";
 
         private Conexion()
         {
-            this.baseDatos = "clubdeportivo";
-            this.servidor = "localhost";
-            this.puerto = "3307";
-            this.usuario = "root";
-            this.clave = "";
+            if (File.Exists(rutaConfig))
+            {
+                // Leer desde el archivo
+                var lines = File.ReadAllLines(rutaConfig);
+                foreach (var line in lines)
+                {
+                    if (line.Contains("="))
+                    {
+                        var parts = line.Split('=');
+                        switch (parts[0].Trim())
+                        {
+                            case "servidor": this.servidor = parts[1].Trim(); break;
+                            case "puerto": this.puerto = parts[1].Trim(); break;
+                            case "usuario": this.usuario = parts[1].Trim(); break;
+                            case "clave": this.clave = parts[1].Trim(); break;
+                            case "basedatos": this.baseDatos = parts[1].Trim(); break;
+                        }
+                    }
+                }
+
+                return; // Salir porque ya se tienen los datos
+            }
+
+            // Si no hay archivo, pedir los datos
+            bool correcto = false;
+            int mensaje;
+
+            // variables para recibir datos desde el teclado
+            string T_baseDatos = "";
+            string T_servidor = "";
+            string T_puerto = "";
+            string T_usuario = "";
+            string T_clave = "";
+
+            while (!correcto)
+            {
+                // Cuadros de dialogo para ingreso de datos
+                T_servidor = Interaction.InputBox("Ingrese el servidor", "Conexión DB");
+                T_puerto = Interaction.InputBox("Ingrese el puerto", "Conexión DB");
+                T_baseDatos = Interaction.InputBox("Ingrese el nombre de la base de datos", "Conexión DB");
+                T_usuario = Interaction.InputBox("Ingrese el usuario", "Conexión DB");
+                T_clave = Interaction.InputBox("Ingrese la clave", "Conexión DB");
+
+                mensaje = (int)MessageBox.Show(
+                   $"Datos ingresados:\nSERVIDOR= {T_servidor}\nPUERTO= {T_puerto}\nBASE DE DATOS= {T_baseDatos}\nUSUARIO= {T_usuario}\nCLAVE = {T_clave}\n\n¿Los datos son correctos?",
+                   "Aviso del sistema",
+                   MessageBoxButtons.YesNo,
+                   MessageBoxIcon.Question);
+
+                if (mensaje != 6) // valor 6 corresponde a SI
+                {
+                    MessageBox.Show("Ingrese nuevamente los datos");
+                    correcto = false;
+                }
+                else
+                {
+                    correcto = true;
+                }
+            }
+
+            // Actualizar variables de conexión por datos obtenidos por teclado
+            this.servidor = T_servidor;
+            this.puerto = T_puerto;
+            this.baseDatos = T_baseDatos;
+            this.usuario = T_usuario;
+            this.clave = T_clave;
+
+            using (StreamWriter writer = new StreamWriter(rutaConfig))
+            {
+                writer.WriteLine($"servidor={T_servidor}");
+                writer.WriteLine($"puerto={T_puerto}");
+                writer.WriteLine($"basedatos={T_baseDatos}");
+                writer.WriteLine($"usuario={T_usuario}");
+                writer.WriteLine($"clave={T_clave}");
+            }
         }
 
         public MySqlConnection CrearConexion()
@@ -36,14 +104,13 @@ namespace CludDeportivo.Datos
             {
                 cadena.ConnectionString = $"datasource = {this.servidor}; \nport= {this.puerto}; \nusername = {this.usuario}; \npassword = {this.clave}; \nDatabase = {this.baseDatos}";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 cadena = null;
-                throw;
+                throw new Exception("Error al crear la conexión: " + ex.Message);
             }
 
             return cadena;
-
         }
 
         public static Conexion getInstancia()
@@ -54,7 +121,5 @@ namespace CludDeportivo.Datos
             }
             return con;
         }
-
-
     }
 }
