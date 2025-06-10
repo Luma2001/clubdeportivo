@@ -54,11 +54,18 @@ namespace CludDeportivo.Datos
             while (!correcto)
             {
                 // Cuadros de dialogo para ingreso de datos
-                T_servidor = Interaction.InputBox("Ingrese el servidor", "Conexión DB");
-                T_puerto = Interaction.InputBox("Ingrese el puerto", "Conexión DB");
-                T_baseDatos = Interaction.InputBox("Ingrese el nombre de la base de datos", "Conexión DB");
-                T_usuario = Interaction.InputBox("Ingrese el usuario", "Conexión DB");
-                T_clave = Interaction.InputBox("Ingrese la clave", "Conexión DB");
+                T_servidor = Interaction.InputBox("Ingrese el servidor (por defecto: localhost)", "Conexión DB", "localhost");
+                T_puerto = Interaction.InputBox("Ingrese el puerto (por defecto: 3306)", "Conexión DB", "3306");
+                T_baseDatos = Interaction.InputBox("Ingrese la base de datos (por defecto: clubdeportivo)", "Conexión DB", "clubdeportivo");
+                T_usuario = Interaction.InputBox("Ingrese el usuario (por defecto: root)", "Conexión DB", "root");
+                T_clave = Interaction.InputBox("Ingrese la clave (por defecto: <vacío>)", "Conexión DB", "");
+
+                // Aplicar valores por defecto si están vacíos
+                if (string.IsNullOrWhiteSpace(T_servidor)) T_servidor = "localhost";
+                if (string.IsNullOrWhiteSpace(T_puerto)) T_puerto = "3306";
+                if (string.IsNullOrWhiteSpace(T_baseDatos)) T_baseDatos= "clubdeportivo";
+                if (string.IsNullOrWhiteSpace(T_usuario)) T_usuario = "root";
+                if (string.IsNullOrWhiteSpace(T_clave)) T_clave = "";
 
                 mensaje = (int)MessageBox.Show(
                    $"Datos ingresados:\nSERVIDOR= {T_servidor}\nPUERTO= {T_puerto}\nBASE DE DATOS= {T_baseDatos}\nUSUARIO= {T_usuario}\nCLAVE = {T_clave}\n\n¿Los datos son correctos?",
