@@ -15,6 +15,13 @@ namespace CludDeportivo
             CargarActividades();
 
             opSocio.Checked = true; // Inicializar como socio
+            rbtEfectivo.Checked = true;
+
+            rbtEfectivo.CheckedChanged += (s, e) => ActualizarMontoAPagar();
+            rbtTarjeta.CheckedChanged += (s, e) => ActualizarMontoAPagar();
+            rbtCuota1.CheckedChanged += (s, e) => ActualizarMontoAPagar();
+            rbtCuota3.CheckedChanged += (s, e) => ActualizarMontoAPagar();
+            rbtCuota6.CheckedChanged += (s, e) => ActualizarMontoAPagar();
         }
 
         public Cobrar(string dni)
@@ -88,7 +95,7 @@ namespace CludDeportivo
                             comprobante.direccion_f = ""; // Obtener dirección desde BD
                             comprobante.fecha_f = DateTime.Now;
                             comprobante.monto_f = monto;
-                            comprobante.forma_f = optEfvo.Checked ? "Efectivo" : "Tarjeta";
+                            comprobante.forma_f = rbtEfectivo.Checked ? "Efectivo" : "Tarjeta";
                             comprobante.tipo_pago_f = "Cuota";
 
                             // Limpiar formulario
@@ -126,7 +133,7 @@ namespace CludDeportivo
                     comprobante.direccion_f = ""; // Obtener desde BD si es posible
                     comprobante.fecha_f = DateTime.Now;
                     comprobante.monto_f = monto;
-                    comprobante.forma_f = optEfvo.Checked ? "Efectivo" : "Tarjeta";
+                    comprobante.forma_f = rbtEfectivo.Checked ? "Efectivo" : "Tarjeta";
                     comprobante.tipo_pago_f = $"Actividad: {nombreActividad}";
 
                     // Mensaje de éxito
@@ -259,7 +266,9 @@ namespace CludDeportivo
                     float monto = Convert.ToSingle(reader.GetValue(isSocio ? "monto" : "costo"));
                     nombreCliente = reader["Nombre"].ToString();
                     direccionCliente = reader["direccion"]?.ToString() ?? "-";
-                    lblMontoAPagarValue.Text = monto.ToString("F2");
+                    // lblMontoAPagarValue.Text = monto.ToString("F2");
+
+                    AplicarPrecioConDescuento(monto);
                 }
                 else
                 {
@@ -290,6 +299,26 @@ namespace CludDeportivo
             btnPagar.Enabled = !string.IsNullOrEmpty(nombreCliente) && !nombreCliente.Equals("-") &&
                                   (isSocio && lblMontoAPagarValue.Text != "0.00") ||
                                   (!isSocio && cboActividades.SelectedIndex >= 0);
+        }
+
+        private void AplicarPrecioConDescuento(float monto)
+        {
+            float porcentajeDescuento = 1.0f;
+
+            if (rbtTarjeta.Checked)
+            {
+                if (rbtCuota3.Checked)
+                {
+                    porcentajeDescuento = 0.9f;
+                }
+                else if (rbtCuota6.Checked)
+                {
+                    porcentajeDescuento = 0.8f;
+                }
+            }
+
+            float precioFinal = monto * porcentajeDescuento;
+            lblMontoAPagarValue.Text = precioFinal.ToString("F2");
         }
 
         private void cboActividades_SelectedIndexChanged(object sender, EventArgs e)
@@ -326,6 +355,32 @@ namespace CludDeportivo
 
             mensajeError = "";
             return true;
+        }
+
+        private void grpForma_PagoChange(object sender, EventArgs e)
+        {
+            if (rbtTarjeta.Checked)
+            {
+                rbtCuota1.Enabled = true;
+                rbtCuota3.Enabled = true;
+                rbtCuota6.Enabled = true;
+
+                rbtCuota1.Checked = true;
+
+                grpCuotas.ForeColor = SystemColors.ControlText;
+            }
+            else if (rbtEfectivo.Checked)
+            {
+                rbtCuota1.Enabled = false;
+                rbtCuota3.Enabled = false;
+                rbtCuota6.Enabled = false;
+
+                rbtCuota1.Checked = false;
+                rbtCuota3.Checked = false;
+                rbtCuota6.Checked = false;
+
+                grpCuotas.ForeColor = SystemColors.ButtonShadow;
+            }
         }
     }
 }
